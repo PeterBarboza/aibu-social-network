@@ -1,7 +1,7 @@
-import { Request, Response } from "express"
+import { Request } from "express"
 
-import { createUserService } from "../services/createUserService"
-import { authUserService } from "../services/authUserService"
+import { createUserService } from "../services/user/createUserService"
+import { authUserService } from "../services/user/authUserService"
 
 export async function createUserController(req: Request) {
   const result = await createUserService(req)

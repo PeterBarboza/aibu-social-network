@@ -1,9 +1,9 @@
 import { Request } from "express"
 
-import { User } from "../models/user"
+import { User } from "../../models/user"
 
-import { IResponseData, IUser } from "../types/IUser"
-import { generateToken } from "../utils/generateToken"
+import { IResponseData, IUser } from "../../types/IUser"
+import { generateToken } from "../../utils/generateToken"
 
 export async function createUserService(req: Request): Promise<IResponseData> {
   const { name, email, password }: IUser = req.body
