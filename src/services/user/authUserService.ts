@@ -29,7 +29,7 @@ export async function authUserService(req: Request): Promise<IResponseData> {
     }
   }
 
-  user.password = undefined
+  user.password = undefined as any
   const token = generateToken(user._id.toString())
 
   return {
