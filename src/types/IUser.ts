@@ -12,18 +12,20 @@ export interface IUserLogin {
   password: string
 }
 
-interface IMessageResponse {
+export interface IErrorMessageResponse {
   message: string
 }
-interface ILoginResponse {
+
+export interface ISuccessUserResponse {
   user: IUser
   token: string
 }
-interface INewPostResponse {
+
+export interface ISuccessPostResponse {
   post: IPost
 }
 
 export interface IResponseData {
   status: number
-  data: IMessageResponse | ILoginResponse | INewPostResponse | any
+  data: IErrorMessageResponse | ISuccessUserResponse | ISuccessPostResponse | any
 }
