@@ -1,0 +1,22 @@
+{
+  "createUserParam": {
+    "body": {
+      "name": "pedro",
+      "email": "pedro@gmail.com",
+      "password": "2345678"
+    }
+  },
+  "userCreateResult": {
+    "_id": "mock_mongoose_id",
+    "createdAt": "16895742368"
+  },
+  "successResponseRef": {
+    "user": {
+      "name": "pedro",
+      "email": "pedro@gmail.com",
+      "password": "2345678",
+      "createdAt": "16895742368"
+    },
+    "token": ""
+  }
+}
