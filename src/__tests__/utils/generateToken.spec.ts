@@ -1,5 +1,7 @@
 import { generateToken } from "../../utils/generateToken"
 
+//TODO: testar erro do generateToken...
+//...unexpected or undefined param
 describe("Generate token function", () => {
   describe("Happy path", () => {
     it("Should return a string", () => {

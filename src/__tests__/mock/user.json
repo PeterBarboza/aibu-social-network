@@ -6,17 +6,23 @@
       "password": "2345678"
     }
   },
-  "userCreateResult": {
-    "_id": "mock_mongoose_id",
-    "createdAt": "16895742368"
-  },
-  "successResponseRef": {
-    "user": {
-      "name": "pedro",
-      "email": "pedro@gmail.com",
-      "password": "2345678",
-      "createdAt": "16895742368"
+  "successResponse": {
+    "data": {
+      "user": {
+        "name": "pedro",
+        "email": "pedro@gmail.com",
+        "password": null,
+        "_id": "mock_mongoose_id",
+        "createdAt": "16895742368"
+      },
+      "token": "mock_jsonWebToken"
     },
-    "token": ""
+    "status": 200
+  },
+  "errorResponse": {
+    "data": {
+      "message": "some error ocurred"
+    },
+    "status": 400
   }
 }
