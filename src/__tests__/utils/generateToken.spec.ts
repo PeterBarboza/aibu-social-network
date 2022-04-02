@@ -1,7 +1,5 @@
 import { generateToken } from "../../utils/generateToken"
 
-//TODO: testar erro do generateToken...
-//...unexpected or undefined param
 describe("Generate token function", () => {
   describe("Happy path", () => {
     it("Should return a string", () => {
@@ -15,11 +13,13 @@ describe("Generate token function", () => {
 
   describe("Unhappy path", () => {
     it("Should return null", () => {
-      const mockId = null
+      const mockId = { foo: "bar" }
 
-      const token = generateToken(mockId as any)
+      const wrongTypeResult = generateToken(mockId as any)
+      const noParamResult = generateToken(undefined as any)
 
-      expect(token).toBe(null)
+      expect(wrongTypeResult).toBe(null)
+      expect(noParamResult).toBe(null)
     })
   })
 })

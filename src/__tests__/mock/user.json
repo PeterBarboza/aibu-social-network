@@ -6,6 +6,19 @@
       "password": "2345678"
     }
   },
+  "authUserParam": {
+    "body": {
+      "email": "pedro@gmail.com",
+      "password": "2345678"
+    }
+  },
+  "userFullData": {
+    "name": "pedro",
+    "email": "pedro@gmail.com",
+    "password": "2345678",
+    "_id": "mock_mongoose_id",
+    "createdAt": "16895742368"
+  },
   "successResponse": {
     "data": {
       "user": {
