@@ -25,7 +25,16 @@ export async function createUserService(req: Request): Promise<IResponseData> {
     })
 
     user.password = null as any
-    const token = generateToken(user._id.toString())
+    const token = generateToken(user._id as unknown as string)
+
+    if (!token) {
+      return {
+        status: 400,
+        data: {
+          message: "Error generating token"
+        }
+      }
+    }
 
     return {
       status: 200,
