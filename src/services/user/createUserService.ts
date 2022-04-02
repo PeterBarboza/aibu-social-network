@@ -24,7 +24,7 @@ export async function createUserService(req: Request): Promise<IResponseData> {
       password: password
     })
 
-    user.password = undefined as any
+    user.password = null as any
     const token = generateToken(user._id.toString())
 
     return {
