@@ -8,7 +8,8 @@ async function connectToMongoDB() {
     await connect(uri as string)
     console.log("Successfully connected to MongoDB")
   } catch (error) {
-    console.log(error)
+    //TODO: Substituir logs por um logger de produção
+    console.error(error)
   }
 }
 

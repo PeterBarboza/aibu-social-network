@@ -18,6 +18,10 @@ export async function createUserService(req: Request): Promise<IResponseData> {
       }
     }
 
+    //TODO: Adicionar verificador de segurança de senha
+    //Mínimo de X caracteres; as senhas devem conter pelo menos
+    //X maiúsculas e X números ou caracteres especiais
+
     const user = await User.create({
       name: name,
       email: email,
@@ -25,7 +29,7 @@ export async function createUserService(req: Request): Promise<IResponseData> {
     })
 
     user.password = null as any
-    const token = generateToken(user._id as unknown as string)
+    const token = generateToken(user._id.toString())
 
     if (!token) {
       return {
@@ -43,10 +47,14 @@ export async function createUserService(req: Request): Promise<IResponseData> {
         token: token
       }
     }
-  } catch (err) {
+  } catch (error) {
+    //TODO: Substituir logs por um logger de produção
+    console.error(error)
     return {
       status: 400,
-      data: err
+      data: {
+        message: "Error on create user"
+      }
     }
   }
 }

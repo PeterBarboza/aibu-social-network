@@ -9,43 +9,52 @@ import { IResponseData, IUserLogin } from "../../types/IUser"
 export async function authUserService(req: Request): Promise<IResponseData> {
   const { email, password }: IUserLogin = req.body
 
-  const user = await User.findOne({ email: email }).select("+password")
+  try {
+    const user = await User.findOne({ email: email }).select("+password")
 
-  if (!user) {
+    if (!user) {
+      return {
+        status: 400,
+        data: {
+          message: "User not found"
+        }
+      }
+    }
+
+    if (!await compare(password, user.password)) {
+      return {
+        status: 400,
+        data: {
+          message: "Invalid password"
+        }
+      }
+    }
+
+    user.password = null as any
+    const token = generateToken(user._id.toString())
+
+    if (!token) {
+      return {
+        status: 400,
+        data: {
+          message: "Error generating token"
+        }
+      }
+    }
+
+    return {
+      status: 200,
+      data: {
+        user: user,
+        token: token
+      }
+    }
+  } catch (error) {
     return {
       status: 400,
       data: {
-        message: "User not found"
+        message: "Error on auth user"
       }
-    }
-  }
-
-  if (!await compare(password, user.password)) {
-    return {
-      status: 400,
-      data: {
-        message: "Invalid password"
-      }
-    }
-  }
-
-  user.password = null as any
-  const token = generateToken(user._id as unknown as string)
-
-  if (!token) {
-    return {
-      status: 400,
-      data: {
-        message: "Error generating token"
-      }
-    }
-  }
-
-  return {
-    status: 200,
-    data: {
-      user: user,
-      token: token
     }
   }
 }

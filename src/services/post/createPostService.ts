@@ -6,15 +6,12 @@ import { User } from "../../models/user"
 import { IPost } from "../../types/IPost";
 import { IResponseData } from "../../types/IUser";
 
-//TODO: Implementar verificação JWT, para saber se é realmente o usuário
-//que está tentando fazer o post.
 export async function createPostService(req: Request): Promise<IResponseData> {
-  const { content, author_id }: IPost = req.body
-
-  //...JWT Verify...//
+  const { content } = req.body
+  const author_id = req.headers._id as string
 
   try {
-    if (!await User.findById(author_id)) {
+    if (!await User.findOne({ _id: author_id })) {
       return {
         status: 400,
         data: {
@@ -25,7 +22,7 @@ export async function createPostService(req: Request): Promise<IResponseData> {
 
     const post = await Post.create({
       content: content,
-      author_id: author_id,
+      author_id: author_id
     })
 
     return {
@@ -34,10 +31,14 @@ export async function createPostService(req: Request): Promise<IResponseData> {
         post: post,
       }
     }
-  } catch (err) {
+  } catch (error) {
+    //TODO: Substituir logs por um logger de produção
+    console.error(error)
     return {
       status: 400,
-      data: err
+      data: {
+        message: "Error on create post"
+      }
     }
   }
 }

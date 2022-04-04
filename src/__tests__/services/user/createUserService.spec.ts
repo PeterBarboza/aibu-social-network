@@ -1,9 +1,9 @@
 import { Request } from "express"
 
-import { createUserService } from "../../services/user/createUserService"
-import { User } from "../../models/user"
+import { createUserService } from "../../../services/user/createUserService"
+import { User } from "../../../models/user"
 
-import mock from "../mock/user.json"
+import mock from "../../mock/user.json"
 
 describe("Create user service", () => {
   afterEach(() => {

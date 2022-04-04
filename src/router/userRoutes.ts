@@ -19,10 +19,4 @@ userRouter.post("/authenticate", async (req, res) => {
   res.status(status).json(data)
 })
 
-userRouter.get("/projects", async (req, res) => {
-  res.status(200).json({ ok: true })
-})
-
-
-
 export { userRouter }
