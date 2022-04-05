@@ -12,8 +12,8 @@ const postSchema = new Schema<IPost>({
     required: true
   },
   createdAt: {
-    type: Date,
-    default: Date.now
+    type: Number,
+    required: true
   }
 })
 

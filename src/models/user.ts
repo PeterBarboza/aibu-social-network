@@ -3,6 +3,8 @@ import { hash } from "bcryptjs"
 
 import { IUser } from "../types/IUser"
 
+//TODO: Talvez adicionar campo de lastAccess, para armazenar o momento do último login
+//para assim usa-lo para fazer o get dos posts e evitar posts repetidos.
 const userSchema = new Schema<IUser>({
   name: {
     type: String,
@@ -20,8 +22,8 @@ const userSchema = new Schema<IUser>({
     select: false
   },
   createdAt: {
-    type: Date,
-    default: Date.now
+    type: Number,
+    required: true
   }
 })
 
