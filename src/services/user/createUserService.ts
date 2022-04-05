@@ -2,7 +2,8 @@ import { Request } from "express"
 
 import { User } from "../../models/user"
 
-import { IResponseData, IUser } from "../../types/IUser"
+import { IUser } from "../../types/IUser"
+import { IResponseData } from "../../types/IResponses"
 import { generateToken } from "../../utils/generateToken"
 
 export async function createUserService(req: Request): Promise<IResponseData> {
@@ -25,11 +26,12 @@ export async function createUserService(req: Request): Promise<IResponseData> {
     const user = await User.create({
       name: name,
       email: email,
-      password: password
+      password: password,
+      createdAt: Date.now()
     })
 
     user.password = null as any
-    const token = generateToken(user._id.toString())
+    const token = generateToken(user._id as unknown as string)
 
     if (!token) {
       return {
