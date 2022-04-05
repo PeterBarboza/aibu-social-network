@@ -4,7 +4,8 @@ import { compare } from "bcryptjs"
 import { User } from "../../models/user"
 import { generateToken } from "../../utils/generateToken"
 
-import { IResponseData, IUserLogin } from "../../types/IUser"
+import { IUserLogin } from "../../types/IUser"
+import { IResponseData } from "../../types/IResponses"
 
 export async function authUserService(req: Request): Promise<IResponseData> {
   const { email, password }: IUserLogin = req.body
@@ -31,7 +32,7 @@ export async function authUserService(req: Request): Promise<IResponseData> {
     }
 
     user.password = null as any
-    const token = generateToken(user._id.toString())
+    const token = generateToken(user._id as unknown as string)
 
     if (!token) {
       return {
