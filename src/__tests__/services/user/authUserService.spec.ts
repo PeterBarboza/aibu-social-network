@@ -1,12 +1,12 @@
 import { Request } from "express"
 
-import { authUserService } from "../../services/user/authUserService"
-import { User } from "../../models/user"
+import { authUserService } from "../../../services/user/authUserService"
+import { User } from "../../../models/user"
 import bcrypt from "bcryptjs"
 
-import mock from "../mock/user.json"
+import mock from "../../mock/user.json"
 
-jest.mock("../../models/user", () => {
+jest.mock("../../../models/user", () => {
   class UserSuccess {
     static select(param: any) {
     }
