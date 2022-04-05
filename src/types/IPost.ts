@@ -1,5 +1,5 @@
 export interface IPost {
   content: string
-  createdAt: Date
+  createdAt: number
   author_id: string
 }
