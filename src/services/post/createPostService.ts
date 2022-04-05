@@ -3,8 +3,7 @@ import { Request } from "express";
 import { Post } from "../../models/post"
 import { User } from "../../models/user"
 
-import { IPost } from "../../types/IPost";
-import { IResponseData } from "../../types/IUser";
+import { IResponseData } from "../../types/IResponses";
 
 export async function createPostService(req: Request): Promise<IResponseData> {
   const { content } = req.body
@@ -22,7 +21,8 @@ export async function createPostService(req: Request): Promise<IResponseData> {
 
     const post = await Post.create({
       content: content,
-      author_id: author_id
+      author_id: author_id,
+      createdAt: Date.now()
     })
 
     return {
