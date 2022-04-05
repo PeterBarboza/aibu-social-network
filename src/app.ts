@@ -9,7 +9,7 @@ const app = express()
 const port = process.env.PORT
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 
 app.use("/auth", userRouter)
 app.use("/post", ensureAuthenticated, postRouter)
