@@ -14,7 +14,7 @@ export async function createPostService(req: Request): Promise<IResponseData> {
       return {
         status: 400,
         data: {
-          message: "Invalid user_id not found"
+          message: "Invalid user_id"
         }
       }
     }
