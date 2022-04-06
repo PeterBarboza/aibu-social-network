@@ -6,24 +6,6 @@ import bcrypt from "bcryptjs"
 
 import mock from "../../mock/user.json"
 
-jest.mock("../../../models/user", () => {
-  class UserSuccess {
-    static select(param: any) {
-    }
-
-    static findOne(param: any) {
-
-      return {
-        select: this.select
-      }
-    }
-  }
-
-  return {
-    User: UserSuccess
-  }
-})
-
 describe("Auth user service", () => {
   describe("Happy path", () => {
     it("Should return a user and token object with status 200", async () => {
