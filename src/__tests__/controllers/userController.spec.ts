@@ -9,7 +9,7 @@ import mock from "../mock/user.json"
 jest.mock("../../services/user/createUserService")
 jest.mock("../../services/user/authUserService")
 
-describe("Create user controller", () => {
+describe("User controller", () => {
   afterEach(() => {
     jest.restoreAllMocks()
   })
