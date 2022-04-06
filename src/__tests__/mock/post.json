@@ -1,0 +1,34 @@
+{
+  "postFullData": {
+    "content": "pedro",
+    "author_id": "mock_author_mongoose_id",
+    "_id": "mock_mongoose_id",
+    "createdAt": "16895742368"
+  },
+  "createPostParam": {
+    "body": {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id"
+    },
+    "headers": {
+      "_id": "mock_author_mongoose_id"
+    }
+  },
+  "successResponse": {
+    "data": {
+      "post": {
+        "content": "pedro",
+        "author_id": "mock_author_mongoose_id",
+        "_id": "mock_mongoose_id",
+        "createdAt": "16895742368"
+      }
+    },
+    "status": 200
+  },
+  "errorResponse": {
+    "data": {
+      "message": "some error ocurred"
+    },
+    "status": 400
+  }
+}
