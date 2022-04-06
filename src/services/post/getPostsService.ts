@@ -1,6 +1,9 @@
 import { Request } from "express";
 import { Post } from "../../models/post";
+
 import { IResponseData } from "../../types/IResponses";
+
+import "dotenv/config"
 
 export async function getPostsService(req: Request): Promise<IResponseData> {
   //TODO: Decidir como irei capturar o unixDate do client sem que haja
@@ -11,6 +14,7 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
   //Date.now() no servidor e esse será o valor de referência para buscar o feed
 
   const unixDateQS = req.query.unixDate as string
+  const apiUrl = process.env.API_URL
 
   try {
     if (!unixDateQS) {
@@ -59,7 +63,7 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
       status: 200,
       data: {
         posts: postsArray,
-        next: `http://localhost:4000/post/getFeed?unixDate=${lastPostCreatedAtValue}`
+        next: `${apiUrl}/post/getFeed?unixDate=${lastPostCreatedAtValue}`
       }
     }
   } catch (error) {
