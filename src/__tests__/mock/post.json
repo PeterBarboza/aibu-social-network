@@ -3,7 +3,7 @@
     "content": "pedro",
     "author_id": "mock_author_mongoose_id",
     "_id": "mock_mongoose_id",
-    "createdAt": "16895742368"
+    "createdAt": "1649261136721"
   },
   "createPostParam": {
     "body": {
@@ -14,13 +14,18 @@
       "_id": "mock_author_mongoose_id"
     }
   },
-  "successResponse": {
+  "getPostsParam": {
+    "query": {
+      "unixDate": "1649261136721"
+    }
+  },
+  "successCreatePostResponse": {
     "data": {
       "post": {
         "content": "pedro",
         "author_id": "mock_author_mongoose_id",
         "_id": "mock_mongoose_id",
-        "createdAt": "16895742368"
+        "createdAt": "1649261136721"
       }
     },
     "status": 200
@@ -30,5 +35,205 @@
       "message": "some error ocurred"
     },
     "status": 400
-  }
+  },
+  "successgetPostsResponse10": {
+    "data": {
+      "posts": [
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136721"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136722"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136723"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136724"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136725"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136726"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136727"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136728"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136729"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136730"
+        }
+      ],
+      "next": "http://localhost:4000/post/getFeed?unixDate=1649261136730"
+    },
+    "status": 200
+  },
+  "successgetPostsResponse5": {
+    "data": {
+      "posts": [
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136721"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136722"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136723"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136724"
+        },
+        {
+          "content": "pedro",
+          "author_id": "mock_author_mongoose_id",
+          "_id": "mock_mongoose_id",
+          "createdAt": "1649261136725"
+        }
+      ],
+      "next": "finish"
+    },
+    "status": 200
+  },
+  "postsArray10": [
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136721"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136722"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136723"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136724"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136725"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136726"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136727"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136728"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136729"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136730"
+    }
+  ],
+  "postsArray5": [
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136721"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136722"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136723"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136724"
+    },
+    {
+      "content": "pedro",
+      "author_id": "mock_author_mongoose_id",
+      "_id": "mock_mongoose_id",
+      "createdAt": "1649261136725"
+    }
+  ]
 }
