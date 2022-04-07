@@ -6,17 +6,66 @@
     "createdAt": "1649261136721"
   },
   "createPostParam": {
-    "body": {
-      "content": "pedro",
-      "author_id": "mock_author_mongoose_id"
+    "success": {
+      "body": {
+        "content": "pedro",
+        "author_id": "mock_author_mongoose_id"
+      },
+      "headers": {
+        "_id": "mock_author_mongoose_id"
+      }
     },
-    "headers": {
-      "_id": "mock_author_mongoose_id"
+    "fail": {
+      "body": {
+        "content": "",
+        "author_id": "mock_author_mongoose_id"
+      },
+      "headers": {
+        "_id": "mock_author_mongoose_id"
+      }
     }
   },
-  "getPostsParam": {
-    "query": {
-      "unixDate": "1649261136721"
+  "getPostsParams": {
+    "success": {
+      "withUnixDateAndLimit": {
+        "query": {
+          "unixDate": "1649261136721",
+          "limit": 5
+        }
+      },
+      "withUnixDateAndWrongLimit": {
+        "query": {
+          "unixDate": "1649261136721",
+          "limit": "anything_That_isn't_a_number"
+        }
+      },
+      "withUnixDate": {
+        "query": {
+          "unixDate": "1649261136721"
+        }
+      },
+      "withLimit": {
+        "query": {
+          "limit": 5
+        }
+      },
+      "empty": {
+        "query": {}
+      }
+    },
+    "fail": {
+      "wrongUnixDateLengthAndLimit": {
+        "query": {
+          "unixDate": "1649261136",
+          "limit": 10
+        }
+      },
+      "wrongUnixDateTypeAndLimit": {
+        "query": {
+          "unixDate": "a6c926@13-721",
+          "limit": 10
+        }
+      }
     }
   },
   "successCreatePostResponse": {
