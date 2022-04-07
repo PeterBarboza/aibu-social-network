@@ -10,6 +10,14 @@ export async function createPostService(req: Request): Promise<IResponseData> {
   const author_id = req.headers._id as string
 
   try {
+    if (content.length < 1) {
+      return {
+        status: 400,
+        data: {
+          message: "Content field couldn't be empty"
+        }
+      }
+    }
     if (!await User.findOne({ _id: author_id })) {
       return {
         status: 400,
