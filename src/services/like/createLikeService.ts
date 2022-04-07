@@ -27,6 +27,14 @@ export async function createLikeService(req: Request): Promise<IResponseData> {
         }
       }
     }
+    if (!await Like.findOne({ _id: post_id })) {
+      return {
+        status: 400,
+        data: {
+          message: "Like already exists"
+        }
+      }
+    }
 
     const like = await Like.create({
       createdAt: Date.now(),
