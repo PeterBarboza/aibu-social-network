@@ -13,13 +13,11 @@ describe("Generate token function", () => {
 
   describe("Unhappy path", () => {
     it("Should return null", () => {
-      const mockId = { foo: "bar" }
+      const mockId = undefined
 
       const wrongTypeResult = generateToken(mockId as any)
-      const noParamResult = generateToken(undefined as any)
 
       expect(wrongTypeResult).toBe(null)
-      expect(noParamResult).toBe(null)
     })
   })
 })

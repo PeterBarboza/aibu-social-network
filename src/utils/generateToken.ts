@@ -6,11 +6,11 @@ import "dotenv/config"
 export function generateToken(_id: string): string | null {
   const secret = process.env.SECRET
 
-  const string_id = _id.toString()
-
-  if (!string_id || typeof string_id !== "string") {
+  if (!_id || !_id.toString) {
     return null
   }
+
+  const string_id = _id.toString()
 
   const token = sign({ _id: string_id }, secret as string, {
     expiresIn: 86400
