@@ -15,6 +15,7 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
 
   const { unixDate, limit } = req.query
   const apiUrl = process.env.API_URL
+  const postsLimit = limit as any > 0 ? Number(limit) : 10
 
   try {
     if (unixDate) {
@@ -37,10 +38,9 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
 
       const unixDateNumber = Number(unixDate)
 
-      //Essa query busca todos os posts; criados antes do unixDateNumber; trás os mais recentes; porém o limite é "limit"
-      const postsArray = await Post.find().gt('createdAt', unixDateNumber).sort({ createdAt: -1 }).limit(limit as unknown as number)
+      const postsArray = await Post.find().lt('createdAt', unixDateNumber).sort({ createdAt: -1 }).limit(postsLimit as unknown as number)
 
-      if (postsArray.length < Number(limit)) {
+      if (postsArray.length < Number(postsLimit)) {
         return {
           status: 200,
           data: {
@@ -56,14 +56,12 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
         status: 200,
         data: {
           posts: postsArray,
-          next: `${apiUrl}/post/getFeed?unixDate=${lastPostCreatedAtValue}&limit=${limit || false}`
+          next: `${apiUrl}/post/getFeed?unixDate=${lastPostCreatedAtValue}&limit=${postsLimit}`
         }
       }
     }
-    const postsLimit = limit as unknown as number || 10
-
     //Essa query busca todos os posts; trás os mais recentes; porém o limite é "limit"
-    const postsArray = await Post.find().sort({ createdAt: -1 }).limit(postsLimit)
+    const postsArray = await Post.find().sort({ createdAt: -1 }).limit(postsLimit as unknown as number)
 
     if (postsArray.length < postsLimit) {
       return {
@@ -81,7 +79,7 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
       status: 200,
       data: {
         posts: postsArray,
-        next: `${apiUrl}/post/getFeed?unixDate=${lastPostCreatedAtValue}&limit=${limit || false}`
+        next: `${apiUrl}/post/getFeed?unixDate=${lastPostCreatedAtValue}&limit=${postsLimit}`
       }
     }
 
