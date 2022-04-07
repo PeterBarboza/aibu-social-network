@@ -16,7 +16,7 @@ describe("Create post service", () => {
       Post.create = jest.fn(() => Promise.resolve(mock.postFullData) as any)
       User.findOne = jest.fn(() => Promise.resolve(true) as any)
 
-      const { data, status } = await createPostService(mock.createPostParam as unknown as Request)
+      const { data, status } = await createPostService(mock.createPostParam.success as unknown as Request)
 
       const spyCreate = jest.spyOn(Post, "create")
       const spyFindOne = jest.spyOn(User, "findOne")
@@ -34,7 +34,7 @@ describe("Create post service", () => {
         Post.create = jest.fn(() => Promise.resolve(mock.postFullData) as any)
         User.findOne = jest.fn(() => Promise.resolve(null) as any)
 
-        const { data, status } = await createPostService(mock.createPostParam as unknown as Request)
+        const { data, status } = await createPostService(mock.createPostParam.success as unknown as Request)
 
         const spyCreate = jest.spyOn(Post, "create")
         const spyFindOne = jest.spyOn(User, "findOne")
@@ -47,11 +47,19 @@ describe("Create post service", () => {
         expect(status).toBe(400)
       })
 
+      it("Should return a 'Content field couldn't be empty' message with status 400", async () => {
+        const { data, status } = await createPostService(mock.createPostParam.fail as unknown as Request)
+
+        expect(data.message).toBe("Content field couldn't be empty")
+
+        expect(status).toBe(400)
+      })
+
       it("Should return a error object with status 400", async () => {
         Post.create = jest.fn(() => Promise.reject(mock.errorResponse.data) as any)
         User.findOne = jest.fn(() => Promise.resolve(true) as any)
 
-        const { data, status } = await createPostService(mock.createPostParam as unknown as Request)
+        const { data, status } = await createPostService(mock.createPostParam.success as unknown as Request)
 
         const spyCreate = jest.spyOn(Post, "create")
         const spyFindOne = jest.spyOn(User, "findOne")
