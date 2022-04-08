@@ -27,7 +27,7 @@ export async function createLikeService(req: Request): Promise<IResponseData> {
         }
       }
     }
-    if (!await Like.findOne({ _id: post_id })) {
+    if (!await Like.findOne({ post_id: post_id, author_id: author_id })) {
       return {
         status: 400,
         data: {
@@ -38,7 +38,8 @@ export async function createLikeService(req: Request): Promise<IResponseData> {
 
     const like = await Like.create({
       createdAt: Date.now(),
-      post_id: post_id
+      post_id: post_id,
+      author_id: author_id
     })
 
     if (!like) {
@@ -53,7 +54,7 @@ export async function createLikeService(req: Request): Promise<IResponseData> {
     return {
       status: 200,
       data: {
-        message: "Like created Successfull"
+        like: like
       }
     }
   } catch (error) {
