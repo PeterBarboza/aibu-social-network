@@ -16,7 +16,7 @@ export interface ISuccessCreatePostResponse {
   post: IPost
 }
 export interface ISuccessCreateLikeResponse {
-  message: string
+  like: ILike
 }
 
 export interface ISuccessGetPostsResponse {

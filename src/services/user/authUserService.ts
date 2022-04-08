@@ -51,6 +51,8 @@ export async function authUserService(req: Request): Promise<IResponseData> {
       }
     }
   } catch (error) {
+    //TODO: Substituir logs por um logger de produção
+    console.error(error)
     return {
       status: 400,
       data: {
