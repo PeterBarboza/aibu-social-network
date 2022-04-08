@@ -13,6 +13,9 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
   //um evento de conexão que vai setar o valor do lastConnectionAt com um
   //Date.now() no servidor e esse será o valor de referência para buscar o feed
 
+  //TODO: Na próxima atualização do código, usar stream de dados para trazer os
+  //posts pro cliente
+
   const { unixDate, limit } = req.query
   const apiUrl = process.env.API_URL
   const postsLimit = limit as any > 0 ? Number(limit) : 10
