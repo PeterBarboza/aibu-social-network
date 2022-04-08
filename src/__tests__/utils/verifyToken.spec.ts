@@ -9,7 +9,6 @@ describe("Verify token function", () => {
 
       const { _id } = verifyToken(token as string)
 
-      console.log(_id)
       expect(typeof _id).toBe("string")
       expect(_id).toBe(mockUserId)
     })
@@ -21,7 +20,6 @@ describe("Verify token function", () => {
 
       const { _id } = verifyToken(invalidToken as string)
 
-      console.log(_id)
       expect(_id).toBe(null)
     })
   })
