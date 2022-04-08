@@ -8,8 +8,7 @@
   "createPostParam": {
     "success": {
       "body": {
-        "content": "pedro",
-        "author_id": "mock_author_mongoose_id"
+        "content": "pedro"
       },
       "headers": {
         "_id": "mock_author_mongoose_id"
@@ -17,8 +16,7 @@
     },
     "fail": {
       "body": {
-        "content": "",
-        "author_id": "mock_author_mongoose_id"
+        "content": ""
       },
       "headers": {
         "_id": "mock_author_mongoose_id"
