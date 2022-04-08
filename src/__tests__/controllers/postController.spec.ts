@@ -25,7 +25,7 @@ describe("User controller", () => {
     })
 
     it("Create post service: Should return a success object and status 200", async () => {
-      const { data, status } = await createPostController(mock as any)
+      const { data, status } = await createPostController(mock as unknown as Request)
 
       expect(data).toMatchObject(mock.successCreatePostResponse.data)
 
@@ -33,7 +33,7 @@ describe("User controller", () => {
     })
 
     it("Get posts service: Should return a success object and status 200", async () => {
-      const { data, status } = await getPostsController(mock as any)
+      const { data, status } = await getPostsController(mock as unknown as Request)
 
       expect(data).toMatchObject(mock.successgetPostsResponse10.data)
 
@@ -52,7 +52,7 @@ describe("User controller", () => {
     })
 
     it("Create post service: Should return a error object and status 400", async () => {
-      const { data, status } = await createPostController(mock as any)
+      const { data, status } = await createPostController(mock as unknown as Request)
 
       expect(data.message)
 
@@ -60,7 +60,7 @@ describe("User controller", () => {
     })
 
     it("Get posts service: Should return a error object and status 400", async () => {
-      const { data, status } = await getPostsController(mock as any)
+      const { data, status } = await getPostsController(mock as unknown as Request)
 
       expect(data.message)
 
