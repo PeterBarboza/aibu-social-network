@@ -185,8 +185,6 @@ describe("Get posts service", () => {
     it("Wrong unixDate type and limit: Should return 'unixData format invalid. It must contain numbers only' message with status 400", async () => {
       const { data, status } = await getPostsService(wrongUnixDateTypeAndLimit as unknown as Request)
 
-      console.log(data, status)
-
       expect(data.message).toBe("unixData format invalid. It must contain numbers only")
       expect(status).toBe(400)
     })
@@ -207,8 +205,6 @@ describe("Get posts service", () => {
       }) as any
 
       const { data, status } = await getPostsService(mock.getPostsParams.success.withUnixDateAndLimit as unknown as Request)
-
-      console.log(data, status)
 
       expect(data.message)
       expect(status).toBe(400)

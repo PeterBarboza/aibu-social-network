@@ -50,14 +50,17 @@ describe("Auth user service", () => {
     })
 
     it("Should return a error object with status 400", async () => {
-      User.findOne = jest.fn(() => Promise.reject(mock.errorResponse.data) as any)
+      User.findOne = jest.fn(() => {
+        return {
+          select: () => Promise.reject(mock.errorResponse.data)
+        }
+      }) as any
 
       const { data, status } = await authUserService(mock.createUserParam as Request)
 
       const spyFindOne = jest.spyOn(User, "findOne")
 
       expect(spyFindOne).toHaveBeenCalledTimes(1)
-      expect(spyFindOne).rejects.toBe(mock.errorResponse.data)
 
       expect(data)
 
