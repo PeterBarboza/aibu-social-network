@@ -1,11 +1,11 @@
 import { Request } from "express"
 
 import { createLikeController } from "../../controllers/commentController"
-const { createCommentService } = require("../../services/comment/createCommentService")
+const { createCommentService } = require("../../services/postData/comment/createCommentService")
 
 import mock from "../mock/comment.json"
 
-jest.mock("../../services/comment/createCommentService")
+jest.mock("../../services/postData/comment/createCommentService")
 
 describe("User controller", () => {
   afterEach(() => {

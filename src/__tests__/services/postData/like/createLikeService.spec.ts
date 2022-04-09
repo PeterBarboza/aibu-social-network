@@ -1,11 +1,11 @@
 import { Request } from "express"
 
-import { createLikeService } from "../../../services/like/createLikeService"
-import { Post } from "../../../models/post"
-import { User } from "../../../models/user"
-import { Like } from "../../../models/like"
+import { createLikeService } from "../../../../services/postData/like/createLikeService"
+import { Post } from "../../../../models/post"
+import { User } from "../../../../models/user"
+import { Like } from "../../../../models/like"
 
-import mock from "../../mock/like.json"
+import mock from "../../../mock/like.json"
 
 describe("Create like service", () => {
   beforeAll(() => {

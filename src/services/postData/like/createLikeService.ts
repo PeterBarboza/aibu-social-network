@@ -1,10 +1,10 @@
 import { Request } from "express";
 
-import { Like } from "../../models/like"
-import { User } from "../../models/user"
-import { Post } from "../../models/post"
+import { Like } from "../../../models/like"
+import { User } from "../../../models/user"
+import { Post } from "../../../models/post"
 
-import { IResponseData } from "../../types/IResponses";
+import { IResponseData } from "../../../types/IResponses";
 
 export async function createLikeService(req: Request): Promise<IResponseData> {
   const { post_id } = req.body

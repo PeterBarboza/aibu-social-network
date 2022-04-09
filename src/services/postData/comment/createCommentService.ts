@@ -1,11 +1,11 @@
 import { Request } from "express";
 
-import { Comment } from "../../models/comment"
-import { User } from "../../models/user"
-import { Post } from "../../models/post"
+import { Comment } from "../../../models/comment"
+import { User } from "../../../models/user"
+import { Post } from "../../../models/post"
 
-import { IResponseData } from "../../types/IResponses";
-import { ICreateComment } from "../../types/IComment";
+import { IResponseData } from "../../../types/IResponses";
+import { ICreateComment } from "../../../types/IComment";
 
 export async function createCommentService(req: Request): Promise<IResponseData> {
   const { post_id, content }: ICreateComment = req.body

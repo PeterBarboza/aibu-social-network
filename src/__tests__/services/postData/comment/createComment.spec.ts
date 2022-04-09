@@ -1,11 +1,11 @@
 import { Request } from "express"
 
-import { createCommentService } from "../../../services/comment/createCommentService"
-import { Post } from "../../../models/post"
-import { User } from "../../../models/user"
-import { Comment } from "../../../models/comment"
+import { createCommentService } from "../../../../services/postData/comment/createCommentService"
+import { Post } from "../../../../models/post"
+import { User } from "../../../../models/user"
+import { Comment } from "../../../../models/comment"
 
-import mock from "../../mock/comment.json"
+import mock from "../../../mock/comment.json"
 
 describe("Create post service", () => {
   afterEach(() => {
