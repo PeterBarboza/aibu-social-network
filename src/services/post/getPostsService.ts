@@ -14,7 +14,10 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
   //Date.now() no servidor e esse será o valor de referência para buscar o feed
 
   //TODO: Na próxima atualização do código, usar stream de dados para trazer os
-  //posts pro cliente
+  //posts pro cliente.
+
+  //TODO:: Perguntar para o Brayan se nesse cenários faria sentido usar stream
+  //de dados
 
   const { unixDate, limit } = req.query
   const apiUrl = process.env.API_URL
