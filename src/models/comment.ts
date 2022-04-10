@@ -7,12 +7,12 @@ const commentSchema = new Schema<IComment>({
     type: String,
     required: true
   },
-  author_id: {
-    type: String,
-    required: true
-  },
   createdAt: {
     type: Number,
+    required: true
+  },
+  author_id: {
+    type: String,
     required: true
   },
   post_id: {
