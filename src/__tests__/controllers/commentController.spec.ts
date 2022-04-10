@@ -1,11 +1,11 @@
 import { Request } from "express"
 
-import { createLikeController } from "../../controllers/commentController"
-const { createCommentService } = require("../../services/postData/comment/createCommentService")
+import { createCommentController } from "../../controllers/commentController"
+const { createCommentService } = require("../../services/comment/createCommentService")
 
 import mock from "../mock/comment.json"
 
-jest.mock("../../services/postData/comment/createCommentService")
+jest.mock("../../services/comment/createCommentService")
 
 describe("User controller", () => {
   afterEach(() => {
@@ -20,7 +20,7 @@ describe("User controller", () => {
     })
 
     it("Create comment service: Should return a success object and status 200", async () => {
-      const { data, status } = await createLikeController(mock.createCommentParam.success as unknown as Request)
+      const { data, status } = await createCommentController(mock.createCommentParam.success as unknown as Request)
 
       expect(data).toMatchObject(mock.successCreateCommentResponse.data)
 
@@ -36,7 +36,7 @@ describe("User controller", () => {
     })
 
     it("Create post service: Should return a error object and status 400", async () => {
-      const { data, status } = await createCommentService(mock as unknown as Request)
+      const { data, status } = await createCommentController(mock as unknown as Request)
 
       expect(data.message)
 
