@@ -91,7 +91,7 @@
   },
   "successCreateCommentResponse": {
     "data": {
-      "post": {
+      "comment": {
         "content": "pedro",
         "author_id": "mock_author_mongoose_id",
         "_id": "mock_mongoose_id",
@@ -108,7 +108,7 @@
   },
   "successgetCommentsResponse10": {
     "data": {
-      "posts": [
+      "comments": [
         {
           "content": "pedro",
           "author_id": "mock_author_mongoose_id",
@@ -186,7 +186,7 @@
   },
   "successgetCommentsResponse5": {
     "data": {
-      "posts": [
+      "comments": [
         {
           "content": "pedro",
           "author_id": "mock_author_mongoose_id",

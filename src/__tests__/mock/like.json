@@ -39,5 +39,17 @@
       }
     },
     "status": 200
+  },
+  "successGetLikesResponse": {
+    "data": {
+      "likesCount": 34
+    },
+    "status": 200
+  },
+  "failGetLikesResponse": {
+    "data": {
+      "message": "some error ocurred"
+    },
+    "status": 400
   }
 }
