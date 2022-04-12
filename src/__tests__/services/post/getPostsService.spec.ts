@@ -125,7 +125,7 @@ describe("Get posts service", () => {
       expect(status).toBe(200)
     })
 
-    it("Only limit on param: Should return a array with 10 posts and next url with status 200", async () => {
+    it("Only limit on param: Should return a array with 5 posts and next url with status 200", async () => {
       Post.find = jest.fn(() => {
         return {
           sort: (param: any) => {
