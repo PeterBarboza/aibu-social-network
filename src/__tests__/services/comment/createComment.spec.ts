@@ -94,8 +94,6 @@ describe("Create post service", () => {
 
       const { data, status } = await createCommentService(mock.createCommentParam.success as unknown as Request)
 
-      console.log(data, status)
-
       const spyPostFind = jest.spyOn(Post, "findOne")
       const spyUserFind = jest.spyOn(User, "findOne")
       const spyCommentCreate = jest.spyOn(Comment, "create")
