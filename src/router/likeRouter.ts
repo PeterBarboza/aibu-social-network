@@ -4,7 +4,7 @@ import { createLikeController, getLikesController } from "../controllers/likeCon
 
 const likeRouter = Router()
 
-likeRouter.post("/create", async (req, res) => {
+likeRouter.post("/handle", async (req, res) => {
   const { status, data } = await createLikeController(req)
 
   res.status(status).json(data)

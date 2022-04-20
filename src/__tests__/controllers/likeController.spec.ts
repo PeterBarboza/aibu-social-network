@@ -1,12 +1,12 @@
 import { Request } from "express"
 
 import { createLikeController, getLikesController } from "../../controllers/likeController"
-const { createLikeService } = require("../../services/like/createLikeService")
+const { handleLikeService } = require("../../services/like/handleLikeService")
 const { getLikesService } = require("../../services/like/getLikesService")
 
 import mock from "../mock/like.json"
 
-jest.mock("../../services/like/createLikeService")
+jest.mock("../../services/like/handleLikeService")
 jest.mock("../../services/like/getLikesService")
 
 describe("Like controller", () => {
@@ -16,7 +16,7 @@ describe("Like controller", () => {
 
   describe("Happy path", () => {
     beforeAll(() => {
-      createLikeService.mockImplementation(() => {
+      handleLikeService.mockImplementation(() => {
         return Promise.resolve(mock.successReponse)
       })
       getLikesService.mockImplementation(() => {
@@ -43,7 +43,7 @@ describe("Like controller", () => {
 
   describe("Unhappy path", () => {
     beforeAll(() => {
-      createLikeService.mockImplementation(() => {
+      handleLikeService.mockImplementation(() => {
         return Promise.resolve(mock.errorResponse)
       })
       getLikesService.mockImplementation(() => {

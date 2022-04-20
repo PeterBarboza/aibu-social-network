@@ -1,10 +1,10 @@
 import { Request } from "express";
 
-import { createLikeService } from "../services/like/createLikeService"
+import { handleLikeService } from "../services/like/handleLikeService"
 import { getLikesService } from "../services/like/getLikesService"
 
 export async function createLikeController(req: Request) {
-  const result = await createLikeService(req)
+  const result = await handleLikeService(req)
 
   return result
 }

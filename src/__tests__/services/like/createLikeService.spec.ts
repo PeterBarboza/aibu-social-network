@@ -1,6 +1,6 @@
 import { Request } from "express"
 
-import { createLikeService } from "../../../services/like/createLikeService"
+import { handleLikeService } from "../../../services/like/handleLikeService"
 import { Post } from "../../../models/post"
 import { User } from "../../../models/user"
 import { Like } from "../../../models/like"
@@ -19,7 +19,7 @@ describe("Create like service", () => {
       Like.findOne = jest.fn(() => Promise.resolve(false) as any)
       Like.create = jest.fn(() => Promise.resolve(mock.likeFullData) as any)
 
-      const { data, status } = await createLikeService(mock.createLikeParams.success as unknown as Request)
+      const { data, status } = await handleLikeService(mock.createLikeParams.success as unknown as Request)
 
       expect(data.like).toBe(mock.likeFullData)
       expect(status).toBe(200)
@@ -30,7 +30,7 @@ describe("Create like service", () => {
     it("Should return a 'Invalid user_id' message with status 400", async () => {
       User.findOne = jest.fn(() => Promise.resolve(false) as any)
 
-      const { data, status } = await createLikeService(mock.createLikeParams.success as unknown as Request)
+      const { data, status } = await handleLikeService(mock.createLikeParams.success as unknown as Request)
 
       expect(data.message).toBe("Invalid user_id")
       expect(status).toBe(400)
@@ -40,21 +40,30 @@ describe("Create like service", () => {
       User.findOne = jest.fn(() => Promise.resolve(true) as any)
       Post.findOne = jest.fn(() => Promise.resolve(false) as any)
 
-      const { data, status } = await createLikeService(mock.createLikeParams.success as unknown as Request)
+      const { data, status } = await handleLikeService(mock.createLikeParams.success as unknown as Request)
 
       expect(data.message).toBe("Invalid post_id")
       expect(status).toBe(400)
     })
 
-    it("Should return a 'Like already exists' message with status 400", async () => {
+    //Updated to 'Like removed' instead of 'Like already exists'
+    it("Should return a 'Like removed' message with status 400", async () => {
       User.findOne = jest.fn(() => Promise.resolve(true) as any)
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
       Like.findOne = jest.fn(() => Promise.resolve(true) as any)
+      Like.deleteOne = jest.fn(() => {
+        return {
+          deletedCount: 1
+        }
+      }) as any
 
-      const { data, status } = await createLikeService(mock.createLikeParams.success as unknown as Request)
+      const { data, status } = await handleLikeService(mock.createLikeParams.success as unknown as Request)
 
-      expect(data.message).toBe("Like already exists")
-      expect(status).toBe(400)
+      console.log(data, status)
+
+      expect(data.message).toBe("Like removed")
+      expect(data.deletedCount).toBe(1)
+      expect(status).toBe(200)
     })
 
     it("Should return a 'Error on create like' message with status 400", async () => {
@@ -63,7 +72,7 @@ describe("Create like service", () => {
       Like.findOne = jest.fn(() => Promise.resolve(false) as any)
       Like.create = jest.fn(() => Promise.resolve(false) as any)
 
-      const { data, status } = await createLikeService(mock.createLikeParams.success as unknown as Request)
+      const { data, status } = await handleLikeService(mock.createLikeParams.success as unknown as Request)
 
       expect(data.message).toBe("Error on create like")
       expect(status).toBe(400)
@@ -75,7 +84,7 @@ describe("Create like service", () => {
       Like.findOne = jest.fn(() => Promise.resolve(false) as any)
       Like.create = jest.fn(() => Promise.reject(mock.errorResponse.data) as any)
 
-      const { data, status } = await createLikeService(mock.createLikeParams.success as unknown as Request)
+      const { data, status } = await handleLikeService(mock.createLikeParams.success as unknown as Request)
 
       expect(data.message)
       expect(status).toBe(400)
