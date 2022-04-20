@@ -9,3 +9,8 @@ export interface ICreateComment {
   content: string
   post_id: string
 }
+
+export interface IDeleteComment {
+  post_id: string
+  comment_id: string
+}

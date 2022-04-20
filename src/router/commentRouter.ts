@@ -1,6 +1,10 @@
 import { Router } from "express";
 
-import { createCommentController, getCommentsController } from "../controllers/commentController"
+import {
+  createCommentController,
+  getCommentsController,
+  deleteCommentController
+} from "../controllers/commentController"
 
 const commentRouter = Router()
 
@@ -11,6 +15,12 @@ commentRouter.post("/create", async (req, res) => {
 })
 commentRouter.get("/getComments", async (req, res) => {
   const { status, data } = await getCommentsController(req)
+
+  res.status(status).json(data)
+})
+
+commentRouter.delete("/deleteComment", async (req, res) => {
+  const { status, data } = await deleteCommentController(req)
 
   res.status(status).json(data)
 })
