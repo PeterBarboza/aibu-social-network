@@ -39,7 +39,7 @@ export async function deleteCommentService(req: Request): Promise<IResponseData>
       return {
         status: 400,
         data: {
-          message: "Comment non exists"
+          message: "Invalid comment_id"
         }
       }
     }
