@@ -9,7 +9,7 @@ import mock from "../mock/post.json"
 jest.mock("../../services/post/createPostService")
 jest.mock("../../services/post/getPostsService")
 
-describe("User controller", () => {
+describe("Post controller", () => {
   afterEach(() => {
     jest.restoreAllMocks()
   })
