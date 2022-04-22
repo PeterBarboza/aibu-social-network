@@ -25,6 +25,25 @@
       }
     }
   },
+  "deleteCommentParam": {
+    "success": {
+      "body": {
+        "comment_id": "mock_comment_mongoose_id",
+        "post_id": "mock_post_mongoose_id"
+      },
+      "headers": {
+        "_id": "mock_author_mongoose_id"
+      }
+    },
+    "fail": {
+      "body": {
+        "content": ""
+      },
+      "headers": {
+        "_id": ""
+      }
+    }
+  },
   "getCommentsParams": {
     "success": {
       "withUnixDateAndLimit": {
@@ -97,6 +116,13 @@
         "_id": "mock_mongoose_id",
         "createdAt": "1649261136721"
       }
+    },
+    "status": 200
+  },
+  "successDeleteCommentResponse": {
+    "data": {
+      "message": "Comment deleted",
+      "deletedCount": 1
     },
     "status": 200
   },
