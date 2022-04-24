@@ -14,3 +14,9 @@ export interface IDeleteComment {
   post_id: string
   comment_id: string
 }
+
+export interface IUpdateComment {
+  post_id: string
+  comment_id: string
+  content: string
+}
