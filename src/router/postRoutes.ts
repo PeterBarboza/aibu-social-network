@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { createPostController, getPostsController } from "../controllers/postController"
+import { createPostController, getPostsController, updateCommentController } from "../controllers/postController"
 
 const postRouter = Router()
 
@@ -12,6 +12,12 @@ postRouter.post("/create", async (req, res) => {
 
 postRouter.get("/getFeed", async (req, res) => {
   const { data, status } = await getPostsController(req)
+
+  res.status(status).json(data)
+})
+
+postRouter.patch("/updatePost", async (req, res) => {
+  const { data, status } = await updateCommentController(req)
 
   res.status(status).json(data)
 })
