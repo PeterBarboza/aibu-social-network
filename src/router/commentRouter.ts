@@ -3,7 +3,8 @@ import { Router } from "express";
 import {
   createCommentController,
   getCommentsController,
-  deleteCommentController
+  deleteCommentController,
+  updateCommentController
 } from "../controllers/commentController"
 
 const commentRouter = Router()
@@ -21,6 +22,12 @@ commentRouter.get("/getComments", async (req, res) => {
 
 commentRouter.delete("/deleteComment", async (req, res) => {
   const { status, data } = await deleteCommentController(req)
+
+  res.status(status).json(data)
+})
+
+commentRouter.patch("/updateComment", async (req, res) => {
+  const { status, data } = await updateCommentController(req)
 
   res.status(status).json(data)
 })
