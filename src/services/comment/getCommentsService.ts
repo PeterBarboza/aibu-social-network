@@ -5,13 +5,22 @@ import { Post } from "../../models/post"
 
 import { IResponseData } from "../../types/IResponses"
 
+//TODO: atualizar testes, adicionando a verificação de se há o campo post_id nas queries
 export async function getCommentsService(req: Request): Promise<IResponseData> {
-  const { post_id } = req.body
-  const { unixDate, limit } = req.query
+  const { unixDate, limit, post_id } = req.query
   const apiUrl = process.env.API_URL
   const commentsLimit = limit as any > 0 ? Number(limit) : 10
 
   try {
+    if (!post_id || post_id.length === 0) {
+      return {
+        status: 400,
+        data: {
+          message: "post_id not provided"
+        }
+      }
+    }
+
     if (!await Post.findOne({ _id: post_id })) {
       return {
         status: 400,
@@ -42,13 +51,15 @@ export async function getCommentsService(req: Request): Promise<IResponseData> {
       const unixDateNumber = Number(unixDate)
 
       const commentsArray = await Comment.find({ post_id: post_id }).lt("createdAt", unixDateNumber).sort({ createdAt: -1 }).limit(commentsLimit)
+      const commentsCount = await Comment.countDocuments({ post_id: post_id })
 
       if (commentsArray.length < Number(commentsLimit)) {
         return {
           status: 200,
           data: {
             comments: commentsArray,
-            next: "finish"
+            next: "finish",
+            commentsCount: commentsCount
           }
         }
       }
@@ -65,13 +76,15 @@ export async function getCommentsService(req: Request): Promise<IResponseData> {
     }
 
     const commentsArray = await Comment.find({ post_id: post_id }).sort({ createdAt: -1 }).limit(commentsLimit)
+    const commentsCount = await Comment.countDocuments({ post_id: post_id })
 
     if (commentsArray.length < Number(commentsLimit)) {
       return {
         status: 200,
         data: {
           comments: commentsArray,
-          next: "finish"
+          next: "finish",
+          commentsCount: commentsCount
         }
       }
     }
@@ -82,7 +95,8 @@ export async function getCommentsService(req: Request): Promise<IResponseData> {
       status: 200,
       data: {
         comments: commentsArray,
-        next: `${apiUrl}/comment/getComments?unixDate=${lastCommentCreatedAtValue}&limit=${commentsLimit}`
+        next: `${apiUrl}/comment/getComments?unixDate=${lastCommentCreatedAtValue}&limit=${commentsLimit}`,
+        commentsCount: commentsCount
       }
     }
   } catch (error) {
