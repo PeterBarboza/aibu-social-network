@@ -6,6 +6,8 @@ import { Post } from "../../models/post"
 
 import { IResponseData } from "../../types/IResponses";
 
+//TODO: Pensar em uma forma de não permitir que uma pessoa que tenha acesso ao ID do autor
+//de um like faça uma ação indevida
 export async function handleLikeService(req: Request): Promise<IResponseData> {
   const { post_id } = req.body
   const author_id = req.headers._id as string
