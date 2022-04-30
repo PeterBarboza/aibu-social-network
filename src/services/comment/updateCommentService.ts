@@ -5,12 +5,14 @@ import { Post } from "../../models/post"
 
 import { IResponseData } from "../../types/IResponses";
 import { IUpdateComment } from "../../types/IComment";
+import { IReqHeader } from "../../types";
 
 //TODO: Pensar em uma forma de não permitir que uma pessoa que tenha acesso ao ID do autor
 //de um comentário faça um update indevido
 export async function updateCommentService(req: Request): Promise<IResponseData> {
-  const { post_id, comment_id, content }: IUpdateComment = req.body
-  const author_id = req.headers._id as string
+  const { content }: IUpdateComment = req.body
+  const { post_id, comment_id } = req.query
+  const { _id } = req.headers as IReqHeader
 
   try {
     if (!post_id) {
@@ -45,7 +47,7 @@ export async function updateCommentService(req: Request): Promise<IResponseData>
         }
       }
     }
-    if (!await Comment.findOne({ _id: comment_id, post_id: post_id, author_id: author_id })) {
+    if (!await Comment.findOne({ _id: comment_id, post_id: post_id, author_id: _id })) {
       return {
         status: 400,
         data: {
@@ -54,7 +56,7 @@ export async function updateCommentService(req: Request): Promise<IResponseData>
       }
     }
 
-    const { modifiedCount } = await Comment.updateOne({ _id: comment_id, post_id: post_id, author_id: author_id }, { content: content })
+    const { modifiedCount } = await Comment.updateOne({ _id: comment_id, post_id: post_id, author_id: _id }, { content: content })
 
     return {
       status: 200,
