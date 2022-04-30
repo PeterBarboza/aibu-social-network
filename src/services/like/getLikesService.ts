@@ -6,7 +6,7 @@ import { Post } from "../../models/post";
 import { IResponseData } from "../../types/IResponses";
 
 export async function getLikesService(req: Request): Promise<IResponseData> {
-  const { post_id } = req.body
+  const { post_id } = req.query
 
   try {
     if (!await Post.findOne({ _id: post_id })) {
