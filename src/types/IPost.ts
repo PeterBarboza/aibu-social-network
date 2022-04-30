@@ -9,3 +9,7 @@ export interface IUpdatePost {
   post_id: string
   author_id: string
 }
+
+export interface IDeletePost {
+  post_id: string
+}
