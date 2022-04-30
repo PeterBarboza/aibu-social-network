@@ -5,11 +5,13 @@ import { User } from "../../models/user"
 import { Post } from "../../models/post"
 
 import { IResponseData } from "../../types/IResponses";
-import { ICreateComment } from "../../types/IComment";
+import { ICreateCommentReqBody, ICreateCommentReqQS } from "../../types/IComment";
+import { IReqHeader } from "../../types";
 
 export async function createCommentService(req: Request): Promise<IResponseData> {
-  const { post_id, content }: ICreateComment = req.body
-  const author_id = req.headers._id as string
+  const { content } = req.body as ICreateCommentReqBody
+  const { post_id } = req.query as unknown as ICreateCommentReqQS
+  const { _id } = req.headers as IReqHeader
 
   try {
     if (content.length < 1) {
@@ -20,7 +22,7 @@ export async function createCommentService(req: Request): Promise<IResponseData>
         }
       }
     }
-    if (!await User.findOne({ _id: author_id })) {
+    if (!await User.findOne({ _id: _id })) {
       return {
         status: 400,
         data: {
@@ -40,7 +42,7 @@ export async function createCommentService(req: Request): Promise<IResponseData>
     const comment = await Comment.create({
       content: content,
       post_id: post_id,
-      author_id: author_id,
+      author_id: _id,
       createdAt: Date.now()
     })
 
