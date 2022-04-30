@@ -1,7 +1,7 @@
 import express from "express";
 import "dotenv/config"
 
-import { userRouter } from "./router/userRoutes"
+import { userRouter, authUserRouter } from "./router/userRoutes"
 import { postRouter } from "./router/postRoutes"
 import { likeRouter } from "./router/likeRouter"
 import { commentRouter } from "./router/commentRouter"
@@ -13,7 +13,8 @@ const port = process.env.PORT
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use("/auth", userRouter)
+app.use("/user/auth", authUserRouter)
+app.use("/user", ensureAuthenticated, userRouter)
 app.use("/post", ensureAuthenticated, postRouter)
 app.use("/like", ensureAuthenticated, likeRouter)
 app.use("/comment", ensureAuthenticated, commentRouter)
