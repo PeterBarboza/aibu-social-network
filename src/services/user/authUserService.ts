@@ -26,7 +26,7 @@ export async function authUserService(req: Request): Promise<IResponseData> {
       return {
         status: 400,
         data: {
-          message: "Invalid password"
+          message: "Invalid password",
         }
       }
     }
