@@ -4,14 +4,16 @@ import { Post } from "../../models/post"
 
 import { IResponseData } from "../../types/IResponses";
 import { IUpdatePost } from "../../types/IPost";
+import { IReqHeader } from "../../types";
 
 //TODO: Trocar o status das requisições de todos os serviços para o tipo de status
 //ideal, e não apenas o 400 de bad request
 //TODO: Pensar em uma forma de não permitir que uma pessoa que tenha acesso ao ID do autor
 //de um post faça um update indevido
 export async function updatePostService(req: Request): Promise<IResponseData> {
-  const { post_id, content }: IUpdatePost = req.body
-  const user_id = req.headers._id as string
+  const { post_id } = req.query as unknown as IUpdatePost
+  const { content } = req.body
+  const { _id } = req.headers as IReqHeader
 
   try {
     if (!post_id) {
@@ -41,7 +43,7 @@ export async function updatePostService(req: Request): Promise<IResponseData> {
         }
       }
     }
-    if (post?.author_id !== user_id) {
+    if (post?.author_id !== _id) {
       return {
         status: 400,
         data: {
@@ -50,7 +52,7 @@ export async function updatePostService(req: Request): Promise<IResponseData> {
       }
     }
 
-    const { modifiedCount } = await Post.updateOne({ _id: post_id, author_id: user_id }, { content: content })
+    const { modifiedCount } = await Post.updateOne({ _id: post_id, author_id: _id }, { content: content })
 
     return {
       status: 200,
