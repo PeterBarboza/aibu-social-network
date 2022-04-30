@@ -70,7 +70,8 @@ export async function getCommentsService(req: Request): Promise<IResponseData> {
         status: 200,
         data: {
           comments: commentsArray,
-          next: `${apiUrl}/comment/getComments?unixDate=${lastCommentCreatedAtValue}&limit=${commentsLimit}`
+          next: `${apiUrl}/comment/getComments?unixDate=${lastCommentCreatedAtValue}&limit=${commentsLimit}`,
+          commentsCount: commentsCount
         }
       }
     }
