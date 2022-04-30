@@ -24,6 +24,7 @@ describe("Get comments service", () => {
 
     it("unixDate and limit on param: Should return a array with 5 comments and next url with status 200", async () => {
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
+      Comment.countDocuments = jest.fn(() => Promise.resolve(mock.commentsArray5.length) as any)
       Comment.find = jest.fn(() => {
         return {
           lt: (param: any) => {
@@ -45,6 +46,7 @@ describe("Get comments service", () => {
       expect(data.comments).toMatchObject(mock.commentsArray5)
       expect(data.comments.length).toBe(5)
       expect(data.next).toBe(expectedNextUrl)
+      expect(data.commentsCount).toBe(5)
 
       expect(status).toBe(200)
     })
@@ -54,6 +56,7 @@ describe("Get comments service", () => {
       mockCommentsArray4.pop()
 
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
+      Comment.countDocuments = jest.fn(() => Promise.resolve(mockCommentsArray4.length) as any)
       Comment.find = jest.fn(() => {
         return {
           lt: (param: any) => {
@@ -75,12 +78,14 @@ describe("Get comments service", () => {
       expect(data.comments).toMatchObject(mockCommentsArray4)
       expect(data.comments.length).toBe(4)
       expect(data.next).toBe(expectedNextUrl)
+      expect(data.commentsCount).toBe(4)
 
       expect(status).toBe(200)
     })
 
     it("unixDate and wrong limit on param: Should return a array with 10 comments and next url with status 200", async () => {
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
+      Comment.countDocuments = jest.fn(() => Promise.resolve(mock.commentsArray10.length) as any)
       Comment.find = jest.fn(() => {
         return {
           lt: (param: any) => {
@@ -102,12 +107,14 @@ describe("Get comments service", () => {
       expect(data.comments).toMatchObject(mock.commentsArray10)
       expect(data.comments.length).toBe(10)
       expect(data.next).toBe(expectedNextUrl)
+      expect(data.commentsCount).toBe(10)
 
       expect(status).toBe(200)
     })
 
     it("Only unixDate on param: Should return a array with 10 comments and next url with status 200", async () => {
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
+      Comment.countDocuments = jest.fn(() => Promise.resolve(mock.commentsArray10.length) as any)
       Comment.find = jest.fn(() => {
         return {
           lt: (param: any) => {
@@ -129,12 +136,14 @@ describe("Get comments service", () => {
       expect(data.comments).toMatchObject(mock.commentsArray10)
       expect(data.comments.length).toBe(10)
       expect(data.next).toBe(expectedNextUrl)
+      expect(data.commentsCount).toBe(10)
 
       expect(status).toBe(200)
     })
 
     it("Only limit on param: Should return a array with 5 comments and next url with status 200", async () => {
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
+      Comment.countDocuments = jest.fn(() => Promise.resolve(mock.commentsArray5.length) as any)
       Comment.find = jest.fn(() => {
         return {
           sort: (param: any) => {
@@ -152,12 +161,14 @@ describe("Get comments service", () => {
       expect(data.comments).toMatchObject(mock.commentsArray5)
       expect(data.comments.length).toBe(5)
       expect(data.next).toBe(expectedNextUrl)
+      expect(data.commentsCount).toBe(5)
 
       expect(status).toBe(200)
     })
 
     it("Empty param: Should return a array with 5 posts and next filled with 'finish' with status 200", async () => {
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
+      Comment.countDocuments = jest.fn(() => Promise.resolve(mock.commentsArray5.length) as any)
       Comment.find = jest.fn(() => {
         return {
           sort: (param: any) => {
@@ -175,6 +186,7 @@ describe("Get comments service", () => {
       expect(data.comments).toMatchObject(mock.commentsArray5)
       expect(data.comments.length).toBe(5)
       expect(data.next).toBe(expectedNextUrl)
+      expect(data.commentsCount).toBe(5)
 
       expect(status).toBe(200)
     })
@@ -183,7 +195,15 @@ describe("Get comments service", () => {
   describe("Unhappy path", () => {
     const {
       wrongUnixDateLengthAndLimit,
-      wrongUnixDateTypeAndLimit } = mock.getCommentsParams.fail
+      wrongUnixDateTypeAndLimit,
+      noPost_idProvided } = mock.getCommentsParams.fail
+
+    it("No post_id provided: Should return 'post_id not provided' message with status 400", async () => {
+      const { data, status } = await getCommentsService(noPost_idProvided as unknown as Request)
+
+      expect(data.message).toBe("post_id not provided")
+      expect(status).toBe(400)
+    })
 
     it("Wrong unixDate length and limit: Should return 'unixData format invalid. It must be 13 characters long' message with status 400", async () => {
       Post.findOne = jest.fn(() => Promise.resolve(true) as any)
@@ -203,7 +223,7 @@ describe("Get comments service", () => {
       expect(status).toBe(400)
     })
 
-    it("Any param: Should return a error object with status 400", async () => {
+    it("Invalid post_id: Should a 'Invalid post_id' message with status 400", async () => {
       Post.findOne = jest.fn(() => Promise.resolve(false) as any)
 
       const { data, status } = await getCommentsService(mock.getCommentsParams.success.withUnixDateAndLimit as unknown as Request)

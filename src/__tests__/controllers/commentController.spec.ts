@@ -1,15 +1,23 @@
 import { Request } from "express"
 
-import { createCommentController, getCommentsController, deleteCommentController } from "../../controllers/commentController"
+import {
+  createCommentController,
+  getCommentsController,
+  deleteCommentController,
+  updateCommentController
+} from "../../controllers/commentController"
+
 const { createCommentService } = require("../../services/comment/createCommentService")
 const { getCommentsService } = require("../../services/comment/getCommentsService")
 const { deleteCommentService } = require("../../services/comment/deleteCommentService")
+const { updateCommentService } = require("../../services/comment/updateCommentService")
 
 import mock from "../mock/comment.json"
 
 jest.mock("../../services/comment/createCommentService")
 jest.mock("../../services/comment/getCommentsService")
 jest.mock("../../services/comment/deleteCommentService")
+jest.mock("../../services/comment/updateCommentService")
 
 describe("Comment controller", () => {
   afterEach(() => {
@@ -26,6 +34,9 @@ describe("Comment controller", () => {
       })
       deleteCommentService.mockImplementation(() => {
         return Promise.resolve(mock.successDeleteCommentResponse)
+      })
+      updateCommentService.mockImplementation(() => {
+        return Promise.resolve(mock.successUpdateCommentResponse)
       })
     })
 
@@ -53,6 +64,15 @@ describe("Comment controller", () => {
 
       expect(status).toBe(200)
     })
+
+    it("Update comment service: Should return a success object and status 200", async () => {
+      const { data, status } = await updateCommentController(mock as unknown as Request)
+
+      expect(data.message).toBe(mock.successUpdateCommentResponse.data.message)
+      expect(data.modifiedCount).toBe(1)
+
+      expect(status).toBe(200)
+    })
   })
 
   describe("Unhappy path", () => {
@@ -64,6 +84,9 @@ describe("Comment controller", () => {
         return Promise.resolve(mock.errorResponse)
       })
       deleteCommentService.mockImplementation(() => {
+        return Promise.resolve(mock.errorResponse)
+      })
+      updateCommentService.mockImplementation(() => {
         return Promise.resolve(mock.errorResponse)
       })
     })
@@ -86,6 +109,14 @@ describe("Comment controller", () => {
 
     it("Delete comment service: Should return a error object and status 400", async () => {
       const { data, status } = await deleteCommentController(mock as unknown as Request)
+
+      expect(data.message)
+
+      expect(status).toBe(400)
+    })
+
+    it("Update comment service: Should return a error object and status 400", async () => {
+      const { data, status } = await updateCommentController(mock as unknown as Request)
 
       expect(data.message)
 
