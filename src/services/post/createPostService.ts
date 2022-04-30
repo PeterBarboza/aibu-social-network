@@ -4,10 +4,11 @@ import { Post } from "../../models/post"
 import { User } from "../../models/user"
 
 import { IResponseData } from "../../types/IResponses";
+import { IReqHeader } from "../../types";
 
 export async function createPostService(req: Request): Promise<IResponseData> {
   const { content } = req.body
-  const author_id = req.headers._id as string
+  const { _id } = req.headers as IReqHeader
 
   try {
     if (content.length < 1) {
@@ -18,7 +19,7 @@ export async function createPostService(req: Request): Promise<IResponseData> {
         }
       }
     }
-    if (!await User.findOne({ _id: author_id })) {
+    if (!await User.findOne({ _id: _id })) {
       return {
         status: 400,
         data: {
@@ -29,7 +30,7 @@ export async function createPostService(req: Request): Promise<IResponseData> {
 
     const post = await Post.create({
       content: content,
-      author_id: author_id,
+      author_id: _id,
       createdAt: Date.now()
     })
 
