@@ -14,19 +14,19 @@ commentRouter.post("/create", async (req, res) => {
 
   res.status(status).json(data)
 })
-commentRouter.get("/getComments", async (req, res) => {
+commentRouter.get("/get", async (req, res) => {
   const { status, data } = await getCommentsController(req)
 
   res.status(status).json(data)
 })
 
-commentRouter.delete("/deleteComment", async (req, res) => {
+commentRouter.delete("/delete", async (req, res) => {
   const { status, data } = await deleteCommentController(req)
 
   res.status(status).json(data)
 })
 
-commentRouter.patch("/updateComment", async (req, res) => {
+commentRouter.patch("/update", async (req, res) => {
   const { status, data } = await updateCommentController(req)
 
   res.status(status).json(data)
