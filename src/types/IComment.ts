@@ -5,12 +5,14 @@ export interface IComment {
   post_id: string
 }
 
-export interface ICreateComment {
+export interface ICreateCommentReqBody {
   content: string
+}
+export interface ICreateCommentReqQS {
   post_id: string
 }
 
-export interface IDeleteComment {
+export interface IDeleteCommentReqQS {
   post_id: string
   comment_id: string
 }
