@@ -66,6 +66,48 @@
       }
     }
   },
+  "updatePostParams": {
+    "success": {
+      "body": {
+        "post_id": "mock_post_mongoose_id",
+        "content": "new content"
+      },
+      "headers": {
+        "_id": "mock_author_mongoose_id"
+      }
+    },
+    "fail": {
+      "noPost_id": {
+        "body": {
+          "content": "new content"
+        },
+        "headers": {
+          "_id": "mock_author_mongoose_id"
+        }
+      },
+      "noContent": {
+        "body": {
+          "post_id": "mock_post_mongoose_id"
+        },
+        "headers": {
+          "_id": "mock_author_mongoose_id"
+        }
+      },
+      "wrongAuthor_id": {
+        "body": {
+          "post_id": "mock_post_mongoose_id",
+          "content": "new content"
+        },
+        "headers": {
+          "_id": "mock_wrong_author_mongoose_id"
+        }
+      }
+    }
+  },
+  "deletePostParams": {
+    "success": {},
+    "fail": {}
+  },
   "successCreatePostResponse": {
     "data": {
       "post": {
@@ -74,6 +116,13 @@
         "_id": "mock_mongoose_id",
         "createdAt": "1649261136721"
       }
+    },
+    "status": 200
+  },
+  "successUpdatePostResponse": {
+    "data": {
+      "message": "post updated",
+      "modifiedCount": 1
     },
     "status": 200
   },

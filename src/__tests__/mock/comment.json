@@ -47,63 +47,97 @@
   "getCommentsParams": {
     "success": {
       "withUnixDateAndLimit": {
-        "body": {
-          "post_id": "mock_post_mongoose_id"
-        },
         "query": {
+          "post_id": "mock_post_mongoose_id",
           "unixDate": "1649261136721",
           "limit": 5
         }
       },
       "withUnixDateAndWrongLimit": {
-        "body": {
-          "post_id": "mock_post_mongoose_id"
-        },
         "query": {
+          "post_id": "mock_post_mongoose_id",
           "unixDate": "1649261136721",
           "limit": "anything_That_isn't_a_number"
         }
       },
       "withUnixDate": {
-        "body": {
-          "post_id": "mock_post_mongoose_id"
-        },
         "query": {
+          "post_id": "mock_post_mongoose_id",
           "unixDate": "1649261136721"
         }
       },
       "withLimit": {
-        "body": {
-          "post_id": "mock_post_mongoose_id"
-        },
         "query": {
+          "post_id": "mock_post_mongoose_id",
           "limit": 5
         }
       },
       "empty": {
-        "body": {
+        "query": {
           "post_id": "mock_post_mongoose_id"
-        },
-        "query": {}
+        }
       }
     },
     "fail": {
-      "wrongUnixDateLengthAndLimit": {
-        "body": {
-          "post_id": "mock_post_mongoose_id"
-        },
+      "noPost_idProvided": {
         "query": {
           "unixDate": "1649261136",
           "limit": 10
         }
       },
-      "wrongUnixDateTypeAndLimit": {
-        "body": {
-          "post_id": "mock_post_mongoose_id"
-        },
+      "wrongUnixDateLengthAndLimit": {
         "query": {
+          "post_id": "mock_post_mongoose_id",
+          "unixDate": "1649261136",
+          "limit": 10
+        }
+      },
+      "wrongUnixDateTypeAndLimit": {
+        "query": {
+          "post_id": "mock_post_mongoose_id",
           "unixDate": "a6c926@13-721",
           "limit": 10
+        }
+      }
+    }
+  },
+  "updateCommentParams": {
+    "success": {
+      "body": {
+        "post_id": "mock_post_mongoose_id",
+        "comment_id": "mock_comment_mongoose_id",
+        "content": "Some content"
+      },
+      "headers": {
+        "_id": "mock_author_mongoose_id"
+      }
+    },
+    "fail": {
+      "post_idNotProvided": {
+        "body": {
+          "comment_id": "mock_comment_mongoose_id",
+          "content": "Some content"
+        },
+        "headers": {
+          "_id": "mock_author_mongoose_id"
+        }
+      },
+      "comment_idNotProvided": {
+        "body": {
+          "post_id": "mock_post_mongoose_id",
+          "content": "Some content"
+        },
+        "headers": {
+          "_id": "mock_author_mongoose_id"
+        }
+      },
+      "contentNotProvided": {
+        "body": {
+          "post_id": "mock_post_mongoose_id",
+          "comment_id": "mock_comment_mongoose_id"
+        },
+        "headers": {
+          "_id": "mock_author_mongoose_id"
         }
       }
     }
@@ -125,6 +159,13 @@
       "deletedCount": 1
     },
     "status": 200
+  },
+  "successUpdateCommentResponse": {
+    "status": 200,
+    "data": {
+      "message": "Comment updated",
+      "modifiedCount": 1
+    }
   },
   "errorResponse": {
     "data": {
