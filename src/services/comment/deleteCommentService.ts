@@ -4,11 +4,12 @@ import { Comment } from "../../models/comment"
 import { Post } from "../../models/post"
 
 import { IResponseData } from "../../types/IResponses";
-import { IDeleteComment } from "../../types/IComment";
+import { IDeleteCommentReqQS } from "../../types/IComment";
+import { IReqHeader } from "../../types";
 
 export async function deleteCommentService(req: Request): Promise<IResponseData> {
-  const { post_id, comment_id }: IDeleteComment = req.body
-  const author_id = req.headers._id as string
+  const { post_id, comment_id } = req.query as unknown as IDeleteCommentReqQS
+  const { _id } = req.headers as IReqHeader
 
   try {
     if (!post_id) {
@@ -35,7 +36,7 @@ export async function deleteCommentService(req: Request): Promise<IResponseData>
         }
       }
     }
-    if (!await Comment.findOne({ _id: comment_id, post_id: post_id, author_id: author_id })) {
+    if (!await Comment.findOne({ _id: comment_id, post_id: post_id, author_id: _id })) {
       return {
         status: 400,
         data: {
@@ -44,7 +45,7 @@ export async function deleteCommentService(req: Request): Promise<IResponseData>
       }
     }
 
-    const { deletedCount } = await Comment.remove({ _id: comment_id, post_id: post_id, author_id: author_id })
+    const { deletedCount } = await Comment.remove({ _id: comment_id, post_id: post_id, author_id: _id })
 
     return {
       status: 200,
