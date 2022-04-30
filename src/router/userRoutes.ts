@@ -2,21 +2,39 @@ import { Router } from "express"
 
 import {
   createUserController,
-  authUserController
+  authUserController,
+  updateUserController,
+  deleteUserController,
+  updatePasswordController
 } from "../controllers/userController"
 
-const userRouter = Router()
-
-userRouter.post("/register", async (req, res) => {
+const authUserRouter = Router()
+authUserRouter.post("/register", async (req, res) => {
   const { status, data } = await createUserController(req)
 
   res.status(status).json(data)
 })
-
-userRouter.post("/authenticate", async (req, res) => {
+authUserRouter.post("/authenticate", async (req, res) => {
   const { status, data } = await authUserController(req)
 
   res.status(status).json(data)
 })
 
-export { userRouter }
+const userRouter = Router()
+userRouter.patch("/updateProfile", async (req, res) => {
+  const { data, status } = await updateUserController(req)
+
+  res.status(status).json(data)
+})
+userRouter.post("/delete", async (req, res) => {
+  const { data, status } = await deleteUserController(req)
+
+  res.status(status).json(data)
+})
+userRouter.patch("/updatePassword", async (req, res) => {
+  const { data, status } = await updatePasswordController(req)
+
+  res.status(status).json(data)
+})
+
+export { authUserRouter, userRouter }
