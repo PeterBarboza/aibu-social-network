@@ -5,15 +5,16 @@ import { User } from "../../models/user"
 import { Post } from "../../models/post"
 
 import { IResponseData } from "../../types/IResponses";
+import { IReqHeader } from "../../types";
 
 //TODO: Pensar em uma forma de não permitir que uma pessoa que tenha acesso ao ID do autor
 //de um like faça uma ação indevida
 export async function handleLikeService(req: Request): Promise<IResponseData> {
-  const { post_id } = req.body
-  const author_id = req.headers._id as string
+  const { post_id } = req.query
+  const { _id } = req.headers as IReqHeader
 
   try {
-    if (!await User.findOne({ _id: author_id })) {
+    if (!await User.findOne({ _id: _id })) {
       return {
         status: 400,
         data: {
@@ -29,7 +30,7 @@ export async function handleLikeService(req: Request): Promise<IResponseData> {
         }
       }
     }
-    const hasLike = await Like.findOne({ post_id: post_id, author_id: author_id })
+    const hasLike = await Like.findOne({ post_id: post_id, author_id: _id })
     if (hasLike) {
       const { deletedCount } = await Like.deleteOne({ _id: hasLike._id })
 
@@ -45,7 +46,7 @@ export async function handleLikeService(req: Request): Promise<IResponseData> {
     const like = await Like.create({
       createdAt: Date.now(),
       post_id: post_id,
-      author_id: author_id
+      author_id: _id
     })
 
     if (!like) {
