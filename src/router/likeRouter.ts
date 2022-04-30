@@ -1,15 +1,15 @@
 import { Router } from "express";
 
-import { createLikeController, getLikesController } from "../controllers/likeController"
+import { handleLikeController, getLikesController } from "../controllers/likeController"
 
 const likeRouter = Router()
 
 likeRouter.post("/handle", async (req, res) => {
-  const { status, data } = await createLikeController(req)
+  const { status, data } = await handleLikeController(req)
 
   res.status(status).json(data)
 })
-likeRouter.get("/getLikes", async (req, res) => {
+likeRouter.get("/get", async (req, res) => {
   const { status, data } = await getLikesController(req)
 
   res.status(status).json(data)
