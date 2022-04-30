@@ -5,10 +5,12 @@ import { IUser } from "../types/IUser"
 
 //TODO: Talvez adicionar campo de lastAccess, para armazenar o momento do último login
 //para assim usa-lo para fazer o get dos posts e evitar posts repetidos.
+//TODO: Adicionar campo ImgUrl/ImgFile para permitir o upload de fotos
 const userSchema = new Schema<IUser>({
   name: {
     type: String,
-    required: true
+    required: true,
+    minlength: 1
   },
   email: {
     type: String,
@@ -21,18 +23,18 @@ const userSchema = new Schema<IUser>({
     required: true,
     select: false
   },
+  username: {
+    type: String,
+    required: true,
+    minlength: 1
+  },
+  bio: {
+    type: String
+  },
   createdAt: {
     type: Number,
     required: true
   }
-})
-
-userSchema.pre("save", async function (next) {
-  const safePassword = await hash(this.password, 10)
-
-  this.password = safePassword
-
-  next()
 })
 
 const User = model("user", userSchema)
