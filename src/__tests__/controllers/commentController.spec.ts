@@ -7,17 +7,17 @@ import {
   updateCommentController
 } from "../../controllers/commentController"
 
-const { createCommentService } = require("../../services/comment/createCommentService")
-const { getCommentsService } = require("../../services/comment/getCommentsService")
-const { deleteCommentService } = require("../../services/comment/deleteCommentService")
-const { updateCommentService } = require("../../services/comment/updateCommentService")
+const { createCommentService } = require("../../useCases/comment/createCommentService")
+const { getCommentsService } = require("../../useCases/comment/getCommentsService")
+const { deleteCommentService } = require("../../useCases/comment/deleteCommentService")
+const { updateCommentService } = require("../../useCases/comment/updateCommentService")
 
 import mock from "../mock/comment.json"
 
-jest.mock("../../services/comment/createCommentService")
-jest.mock("../../services/comment/getCommentsService")
-jest.mock("../../services/comment/deleteCommentService")
-jest.mock("../../services/comment/updateCommentService")
+jest.mock("../../useCases/comment/createCommentService")
+jest.mock("../../useCases/comment/getCommentsService")
+jest.mock("../../useCases/comment/deleteCommentService")
+jest.mock("../../useCases/comment/updateCommentService")
 
 describe("Comment controller", () => {
   afterEach(() => {

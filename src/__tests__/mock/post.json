@@ -69,11 +69,13 @@
   "updatePostParams": {
     "success": {
       "body": {
-        "post_id": "mock_post_mongoose_id",
         "content": "new content"
       },
       "headers": {
         "_id": "mock_author_mongoose_id"
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id"
       }
     },
     "fail": {
@@ -83,30 +85,46 @@
         },
         "headers": {
           "_id": "mock_author_mongoose_id"
-        }
+        },
+        "query": {}
       },
       "noContent": {
-        "body": {
-          "post_id": "mock_post_mongoose_id"
-        },
+        "body": {},
         "headers": {
           "_id": "mock_author_mongoose_id"
+        },
+        "query": {
+          "post_id": "mock_post_mongoose_id"
         }
       },
       "wrongAuthor_id": {
         "body": {
-          "post_id": "mock_post_mongoose_id",
           "content": "new content"
         },
         "headers": {
           "_id": "mock_wrong_author_mongoose_id"
+        },
+        "query": {
+          "post_id": "mock_post_mongoose_id"
         }
       }
     }
   },
   "deletePostParams": {
-    "success": {},
-    "fail": {}
+    "success": {
+      "query": {
+        "post_id": "mock_post_mongoose_id"
+      },
+      "headers": {
+        "_id": "mock_author_mongoose_id"
+      }
+    },
+    "fail": {
+      "query": {},
+      "headers": {
+        "_id": "mock_author_mongoose_id"
+      }
+    }
   },
   "successCreatePostResponse": {
     "data": {

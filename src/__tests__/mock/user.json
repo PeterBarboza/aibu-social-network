@@ -1,9 +1,39 @@
 {
   "createUserParam": {
-    "body": {
-      "name": "pedro",
-      "email": "pedro@gmail.com",
-      "password": "2345678"
+    "success": {
+      "body": {
+        "name": "pedro",
+        "email": "pedro@gmail.com",
+        "password": "2345678",
+        "bio": "My bio",
+        "username": "barbozz"
+      }
+    },
+    "fail": {
+      "noName": {
+        "body": {
+          "email": "pedro@gmail.com",
+          "password": "2345678",
+          "bio": "My bio",
+          "username": "barbozz"
+        }
+      },
+      "noUsername": {
+        "body": {
+          "name": "pedro",
+          "email": "pedro@gmail.com",
+          "password": "2345678",
+          "bio": "My bio"
+        }
+      },
+      "noEmail": {
+        "body": {
+          "name": "pedro",
+          "password": "2345678",
+          "bio": "My bio",
+          "username": "barbozz"
+        }
+      }
     }
   },
   "authUserParam": {
@@ -16,6 +46,8 @@
     "name": "pedro",
     "email": "pedro@gmail.com",
     "password": "2345678",
+    "username": "barbozz",
+    "bio": "My bio",
     "_id": "mock_mongoose_id",
     "createdAt": "16895742368"
   },

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from "express"
 
 import { createPostController, getPostsController, updatePostController, deletePostController } from "../controllers/postController"
 

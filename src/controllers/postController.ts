@@ -1,9 +1,9 @@
-import { Request } from "express";
+import { Request } from "express"
 
-import { createPostService } from "../services/post/createPostService"
-import { getPostsService } from "../services/post/getPostsService"
-import { updatePostService } from "../services/post/updatePostService"
-import { deletePostService } from "../services/post/deletePostService"
+import { createPostService } from "../useCases/post/createPostService"
+import { getPostsService } from "../useCases/post/getPostsService"
+import { updatePostService } from "../useCases/post/updatePostService"
+import { deletePostService } from "../useCases/post/deletePostService"
 
 export async function createPostController(req: Request) {
   const result = await createPostService(req)

@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose"
-import { hash } from "bcryptjs"
 
 import { IUser } from "../types/IUser"
 

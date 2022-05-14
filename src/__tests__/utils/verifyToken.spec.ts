@@ -1,5 +1,5 @@
-import { verifyToken } from "../../utils/verifyToken";
-import { generateToken } from "../../utils/generateToken";
+import { verifyToken } from "../../utils/verifyToken"
+import { generateToken } from "../../utils/generateToken"
 
 describe("Verify token function", () => {
   describe("Happy path", () => {

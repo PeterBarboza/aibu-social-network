@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express"
 
-import { verifyToken } from "../utils/verifyToken";
+import { verifyToken } from "../utils/verifyToken"
 
 export function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization

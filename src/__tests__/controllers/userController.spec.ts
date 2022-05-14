@@ -1,13 +1,13 @@
 import { Request } from "express"
 
 import { createUserController, authUserController } from "../../controllers/userController"
-const { createUserService } = require("../../services/user/createUserService")
-const { authUserService } = require("../../services/user/authUserService")
+const { createUserService } = require("../../useCases/user/createUserService")
+const { authUserService } = require("../../useCases/user/authUserService")
 
 import mock from "../mock/user.json"
 
-jest.mock("../../services/user/createUserService")
-jest.mock("../../services/user/authUserService")
+jest.mock("../../useCases/user/createUserService")
+jest.mock("../../useCases/user/authUserService")
 
 describe("User controller", () => {
   afterEach(() => {
@@ -25,7 +25,7 @@ describe("User controller", () => {
     })
 
     it("Create user service: Should return a success object and status 200", async () => {
-      const { data, status } = await createUserController(mock.createUserParam as Request)
+      const { data, status } = await createUserController(mock.createUserParam.success as Request)
 
       expect(data.user).toMatchObject(mock.successResponse.data.user)
 
@@ -58,14 +58,14 @@ describe("User controller", () => {
     })
 
     it("Create user service: Should return a error object and status 400", async () => {
-      const { data, status } = await createUserController(mock.createUserParam as Request)
+      const { data, status } = await createUserController(mock.createUserParam.success as Request)
 
       expect(data)
       expect(status).toBe(400)
     })
 
     it("Create user service: Should return a error object and status 400", async () => {
-      const { data, status } = await authUserController(mock.createUserParam as Request)
+      const { data, status } = await authUserController(mock.createUserParam.success as Request)
 
       expect(data)
       expect(status).toBe(400)

@@ -1,13 +1,13 @@
 import { Request } from "express"
 
-import { createLikeController, getLikesController } from "../../controllers/likeController"
-const { handleLikeService } = require("../../services/like/handleLikeService")
-const { getLikesService } = require("../../services/like/getLikesService")
+import { handleLikeController, getLikesController } from "../../controllers/likeController"
+const { handleLikeService } = require("../../useCases/like/handleLikeService")
+const { getLikesService } = require("../../useCases/like/getLikesService")
 
 import mock from "../mock/like.json"
 
-jest.mock("../../services/like/handleLikeService")
-jest.mock("../../services/like/getLikesService")
+jest.mock("../../useCases/like/handleLikeService")
+jest.mock("../../useCases/like/getLikesService")
 
 describe("Like controller", () => {
   afterEach(() => {
@@ -25,7 +25,7 @@ describe("Like controller", () => {
     })
 
     it("Create like service: Should return a success object and status 200", async () => {
-      const { data, status } = await createLikeController(mock as unknown as Request)
+      const { data, status } = await handleLikeController(mock as unknown as Request)
 
       expect(data.like).toMatchObject(mock.likeFullData)
 
@@ -52,7 +52,7 @@ describe("Like controller", () => {
     })
 
     it("Create like service: Should return a success object and status 200", async () => {
-      const { data, status } = await createLikeController(mock as unknown as Request)
+      const { data, status } = await handleLikeController(mock as unknown as Request)
 
       expect(data.message)
 

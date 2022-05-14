@@ -1,10 +1,12 @@
 import { Request } from "express"
 
-import { createUserService } from "../services/user/createUserService"
-import { authUserService } from "../services/user/authUserService"
-import { updateUserService } from "../services/user/updateUserService"
-import { deleteUserService } from "../services/user/deleteUserService"
-import { updatePasswordService } from "../services/user/updatePasswordService"
+import { createUserService } from "../useCases/user/createUserService"
+import { authUserService } from "../useCases/user/authUserService"
+import { updateUserService } from "../useCases/user/updateUserService"
+import { deleteUserService } from "../useCases/user/deleteUserService"
+import { updatePasswordService } from "../useCases/user/updatePasswordService"
+
+import { uploadImageToBucket } from "../services/uploadImageToBucket"
 
 export async function createUserController(req: Request) {
   const result = await createUserService(req)
@@ -18,8 +20,16 @@ export async function authUserController(req: Request) {
   return result
 }
 
+export async function getUserProfileController(req: Request) {
+  const result = await getUserProfileService(req)
+
+  return result
+}
+
 export async function updateUserController(req: Request) {
-  const result = await updateUserService(req)
+  const uploadImageToBucketResponse = await uploadImageToBucket(req)
+
+  const result = await updateUserService(req, uploadImageToBucketResponse)
 
   return result
 }

@@ -1,9 +1,9 @@
-import { Request } from "express";
+import { Request } from "express"
 
-import { createCommentService } from "../services/comment/createCommentService"
-import { getCommentsService } from "../services/comment/getCommentsService"
-import { deleteCommentService } from "../services/comment/deleteCommentService"
-import { updateCommentService } from "../services/comment/updateCommentService"
+import { createCommentService } from "../useCases/comment/createCommentService"
+import { getCommentsService } from "../useCases/comment/getCommentsService"
+import { deleteCommentService } from "../useCases/comment/deleteCommentService"
+import { updateCommentService } from "../useCases/comment/updateCommentService"
 
 export async function createCommentController(req: Request) {
   const result = await createCommentService(req)

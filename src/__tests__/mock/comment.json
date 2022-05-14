@@ -9,11 +9,13 @@
   "createCommentParam": {
     "success": {
       "body": {
-        "content": "pedro",
-        "post_id": "mock_post_mongoose_id"
+        "content": "pedro"
       },
       "headers": {
         "_id": "mock_author_mongoose_id"
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id"
       }
     },
     "fail": {
@@ -22,25 +24,29 @@
       },
       "headers": {
         "_id": "mock_author_mongoose_id"
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id"
       }
     }
   },
   "deleteCommentParam": {
     "success": {
-      "body": {
-        "comment_id": "mock_comment_mongoose_id",
-        "post_id": "mock_post_mongoose_id"
-      },
       "headers": {
         "_id": "mock_author_mongoose_id"
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id",
+        "comment_id": "mock_comment_mongoose_id"
       }
     },
     "fail": {
-      "body": {
-        "content": ""
-      },
       "headers": {
         "_id": ""
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id",
+        "comment_id": "mock_comment_mongoose_id"
       }
     }
   },
@@ -104,40 +110,49 @@
   "updateCommentParams": {
     "success": {
       "body": {
-        "post_id": "mock_post_mongoose_id",
-        "comment_id": "mock_comment_mongoose_id",
         "content": "Some content"
       },
       "headers": {
         "_id": "mock_author_mongoose_id"
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id",
+        "comment_id": "mock_comment_mongoose_id"
       }
     },
     "fail": {
       "post_idNotProvided": {
         "body": {
-          "comment_id": "mock_comment_mongoose_id",
           "content": "Some content"
         },
         "headers": {
           "_id": "mock_author_mongoose_id"
+        },
+        "query": {
+          "comment_id": "mock_comment_mongoose_id"
         }
       },
       "comment_idNotProvided": {
         "body": {
-          "post_id": "mock_post_mongoose_id",
           "content": "Some content"
         },
         "headers": {
           "_id": "mock_author_mongoose_id"
+        },
+        "query": {
+          "post_id": "mock_post_mongoose_id"
         }
       },
       "contentNotProvided": {
         "body": {
-          "post_id": "mock_post_mongoose_id",
-          "comment_id": "mock_comment_mongoose_id"
+          "content": ""
         },
         "headers": {
           "_id": "mock_author_mongoose_id"
+        },
+        "query": {
+          "post_id": "mock_post_mongoose_id",
+          "comment_id": "mock_comment_mongoose_id"
         }
       }
     }

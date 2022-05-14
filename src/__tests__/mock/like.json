@@ -1,19 +1,19 @@
 {
   "createLikeParams": {
     "success": {
-      "body": {
-        "post_id": "mock_post_mongoose_id"
-      },
       "headers": {
         "_id": "mock_author_mongoose_id"
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id"
       }
     },
     "fail": {
-      "body": {
-        "post_id": "mock_post_mongoose_id"
-      },
       "headers": {
         "_id": "mock_author_mongoose_id"
+      },
+      "query": {
+        "post_id": "mock_post_mongoose_id"
       }
     }
   },

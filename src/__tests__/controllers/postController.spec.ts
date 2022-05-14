@@ -6,15 +6,15 @@ import {
   updatePostController
 } from "../../controllers/postController"
 
-const { createPostService } = require("../../services/post/createPostService")
-const { getPostsService } = require("../../services/post/getPostsService")
-const { updatePostService } = require("../../services/post/updatePostService")
+const { createPostService } = require("../../useCases/post/createPostService")
+const { getPostsService } = require("../../useCases/post/getPostsService")
+const { updatePostService } = require("../../useCases/post/updatePostService")
 
 import mock from "../mock/post.json"
 
-jest.mock("../../services/post/createPostService")
-jest.mock("../../services/post/getPostsService")
-jest.mock("../../services/post/updatePostService")
+jest.mock("../../useCases/post/createPostService")
+jest.mock("../../useCases/post/getPostsService")
+jest.mock("../../useCases/post/updatePostService")
 
 describe("Post controller", () => {
   afterEach(() => {

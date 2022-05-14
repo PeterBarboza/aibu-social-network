@@ -1,7 +1,7 @@
-import { Request } from "express";
+import { Request } from "express"
 
-import { handleLikeService } from "../services/like/handleLikeService"
-import { getLikesService } from "../services/like/getLikesService"
+import { handleLikeService } from "../useCases/like/handleLikeService"
+import { getLikesService } from "../useCases/like/getLikesService"
 
 export async function handleLikeController(req: Request) {
   const result = await handleLikeService(req)
