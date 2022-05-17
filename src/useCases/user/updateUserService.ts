@@ -1,17 +1,15 @@
 import { Request } from "express"
 
 import { User } from "../../models/user"
-import { IReqHeader } from "../../types"
 
+import { IReqHeader } from "../../types"
 import { IUpdateUserReqBody } from "../../types/IUser"
+import { IResponseData } from "../../types/IResponses"
 import { IUploadImageToBucketResponse } from "../../types/IS3"
 
-export async function updateUserService(req: Request, uploadImageResponse: IUploadImageToBucketResponse) {
+export async function updateUserService(req: Request): Promise<IResponseData> {
   const { name, username, bio }: IUpdateUserReqBody = req.body
   const { _id } = req.headers as IReqHeader
-
-  //TODO: Criar "imgUrl: string" no model de usuário
-  //Vídeo parou nos 15:30
 
   try {
     if (name.length < 1) {
@@ -41,11 +39,24 @@ export async function updateUserService(req: Request, uploadImageResponse: IUplo
       }
     }
 
-    //if(req.file) {
-    //  ...Executar update no mongoDB e executar o update da imagem na S3
-    //}
+    const maybeCurrentUser = await User.findOne({ username: username })
 
-    const { modifiedCount } = await User.updateOne({ _id: _id }, { name: name, username: username, bio: bio } as IUpdateUserReqBody)
+    if (maybeCurrentUser && maybeCurrentUser._id.toString() != _id) {
+      return {
+        status: 400,
+        data: {
+          message: "username already in use"
+        }
+      }
+    }
+
+    const updateObject: IUpdateUserReqBody = {
+      name: name,
+      username: username,
+      bio: bio
+    }
+
+    const { modifiedCount } = await User.updateOne({ _id: _id }, updateObject)
 
     return {
       status: 200,
@@ -56,7 +67,7 @@ export async function updateUserService(req: Request, uploadImageResponse: IUplo
     }
 
   } catch (error) {
-    //TODO: sbusti...
+    //TODO: substi...
     console.log(error)
 
     return {

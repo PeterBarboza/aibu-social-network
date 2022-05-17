@@ -73,7 +73,7 @@ export async function getPostsService(req: Request): Promise<IResponseData> {
       return {
         status: 200,
         data: {
-          posts: postsArray,
+          posts: postsArray[0],
           next: "finish"
         }
       }

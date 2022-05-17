@@ -30,6 +30,9 @@ const userSchema = new Schema<IUser>({
   bio: {
     type: String
   },
+  imgUrl: {
+    type: String,
+  },
   createdAt: {
     type: Number,
     required: true

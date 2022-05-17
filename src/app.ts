@@ -14,8 +14,9 @@ const app = express()
 const port = process.env.PORT
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 
+//TODO: Proteger a api de forma corret com o CORS antes do deploy
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
   next()
 })
 
+//TODO: Descomentar a linha abaixo
 app.use("/user/auth", authUserRouter)
 app.use("/user", /* ensureAuthenticated, */ userRouter)
 app.use("/post", ensureAuthenticated, postRouter)

@@ -4,8 +4,7 @@ import { s3, bucketName } from "../s3"
 
 import { IGetFromS3Params } from "../types/IS3"
 
-export async function getImageFromBucket(req: Request) {
-  const imgKey = req.query.profileImg as string
+export async function getImageFromBucket(imgKey: string) {
 
   if (!imgKey) {
     return {

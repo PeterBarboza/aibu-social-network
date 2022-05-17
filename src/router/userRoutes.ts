@@ -1,24 +1,71 @@
 import { Router } from "express"
-import { Writable, Readable, pipeline } from "stream"
-import { promisify } from "util"
 
 import {
   createUserController,
   authUserController,
   updateUserController,
   deleteUserController,
-  updatePasswordController
+  updatePasswordController,
+  getUserProfileController,
+  updateProfileImageController
 } from "../controllers/userController"
 
 import { upload } from "../middlewares/uploadImage"
 
-//TODO: Exclude next line
+//TODO: Testar updateUserService e afins
+//TODO: Add uploadImageToBucket On createUserService
 import { uploadImageToBucket } from "../services/uploadImageToBucket"
 import { getImageFromBucket } from "../services/getImageFromBucket"
+import { Field } from "multer"
+
+const createFields: Field[] = [
+  {
+    name: "name",
+    maxCount: 1
+  },
+  {
+    name: "username",
+    maxCount: 1
+  },
+  {
+    name: "email",
+    maxCount: 1
+  },
+  {
+    name: "bio",
+    maxCount: 1
+  },
+  {
+    name: "password",
+    maxCount: 1
+  },
+  {
+    name: "image",
+    maxCount: 1
+  }
+]
+const updateFields: Field[] = [
+  {
+    name: "name",
+    maxCount: 1
+  },
+  {
+    name: "username",
+    maxCount: 1
+  },
+  {
+    name: "bio",
+    maxCount: 1
+  },
+  {
+    name: "image",
+    maxCount: 1
+  }
+]
 
 const authUserRouter = Router()
 authUserRouter.post("/register", async (req, res) => {
-  const { status, data } = await createUserController(req)
+  const { data, status } = await createUserController(req)
 
   res.status(status).json(data)
 })
@@ -29,17 +76,24 @@ authUserRouter.post("/authenticate", async (req, res) => {
 })
 
 const userRouter = Router()
-userRouter.get("/getUserProfile", async (req, res) => {
-  const { hasFile, data } = await getImageFromBucket(req)
+userRouter.get("/images/:imgKey", async (req, res) => {
+  const { data, hasFile } = await getImageFromBucket(req.params.imgKey)
 
-  if (!data) return res.send("nothing")
+  if (!hasFile || !data) return res.json({ hasFile: hasFile })
 
   data.imgStream.pipe(res)
-
-
-
 })
-userRouter.put("/updateProfile", upload.single("image"), async (req, res) => {
+userRouter.post("/uploadImage", upload.single("image"), async (req, res) => {
+  const { data, hasFile } = await updateProfileImageController(req)
+
+  res.status(200).json({ data, hasFile })
+})
+userRouter.get("/getUserProfile", async (req, res) => {
+  const { data, status } = await getUserProfileController(req)
+
+  res.status(status).json(data)
+})
+userRouter.patch("/updateProfile", upload.fields(updateFields), async (req, res) => {
   const { data, status } = await updateUserController(req)
 
   res.status(status).json(data)
@@ -49,17 +103,10 @@ userRouter.post("/delete", async (req, res) => {
 
   res.status(status).json(data)
 })
-userRouter.post("/updatePassword", async (req, res) => {
+userRouter.patch("/updatePassword", async (req, res) => {
   const { data, status } = await updatePasswordController(req)
 
   res.status(status).json(data)
-})
-
-//TODO: Exclude test route
-userRouter.post("/test", upload.single("image"), async (req, res) => {
-  const { data, hasFile } = await uploadImageToBucket(req)
-
-  res.json({ hasFile: hasFile, data: data })
 })
 
 export { authUserRouter, userRouter }

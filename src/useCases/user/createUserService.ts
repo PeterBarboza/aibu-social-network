@@ -2,13 +2,15 @@ import { Request } from "express"
 import { hash } from "bcryptjs"
 
 import { User } from "../../models/user"
-
-import { IUser } from "../../types/IUser"
-import { IResponseData } from "../../types/IResponses"
 import { generateToken } from "../../utils/generateToken"
 
+import { ICreateUserReqBody, IUser } from "../../types/IUser"
+import { IResponseData } from "../../types/IResponses"
+import { IUploadImageToBucketResponse } from "../../types/IS3"
+
+
 export async function createUserService(req: Request): Promise<IResponseData> {
-  const { name, email, password, bio, username }: IUser = req.body
+  const { name, email, password, bio, username }: ICreateUserReqBody = req.body
 
   try {
     if (!name || name.length < 1) {
@@ -67,14 +69,17 @@ export async function createUserService(req: Request): Promise<IResponseData> {
     //X maiúsculas e X números ou caracteres especiais
 
     const safePassword = await hash(password, 10)
-    const user = await User.create({
+
+    const creationObject: IUser = {
       name: name,
       email: email,
       password: safePassword,
       username: username,
       bio: bio || "",
       createdAt: Date.now()
-    })
+    }
+
+    const user = await User.create(creationObject)
 
     user.password = null as any
     const token = generateToken(user._id as unknown as string)
@@ -97,6 +102,7 @@ export async function createUserService(req: Request): Promise<IResponseData> {
     }
   } catch (error) {
     //TODO: Substituir logs por um logger de produção
+
     console.error(error)
     return {
       status: 400,

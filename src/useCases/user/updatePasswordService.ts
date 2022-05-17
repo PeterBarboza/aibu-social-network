@@ -15,7 +15,7 @@ export async function updatePasswordService(req: Request, authStatus: number, us
       return {
         status: 400,
         data: {
-          message: "unauthorized delete"
+          message: "unauthorized update"
         }
       }
     }
@@ -24,7 +24,7 @@ export async function updatePasswordService(req: Request, authStatus: number, us
       return {
         status: 400,
         data: {
-          message: "unauthorized delete"
+          message: "unauthorized update"
         }
       }
     }

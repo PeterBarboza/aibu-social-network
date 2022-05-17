@@ -4,6 +4,16 @@ export interface IUser {
   password: string
   username: string
   bio: string
+  imgUrl?: string
+  createdAt: number
+}
+
+export interface ICreateUserReqBody {
+  name: string
+  email: string
+  password: string
+  username: string
+  bio: string
   createdAt: number
 }
 
