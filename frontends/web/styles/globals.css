@@ -1,0 +1,53 @@
+/* @font-face {
+  font-family: "inter-thin";
+  src: url("../public/fonts/static/Inter-Thin.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-extra-light";
+  src: url("../public/fonts/static/Inter-ExtraLight.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-light";
+  src: url("../public/fonts/static/Inter-Light.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-regular";
+  src: url("../public/fonts/static/Inter-Regular.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-medium";
+  src: url("../public/fonts/static/Inter-Medium.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-semi-bold";
+  src: url("../public/fonts/static/Inter-SemiBold.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-bold";
+  src: url("../public/fonts/static/Inter-Bold.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-extra-bold";
+  src: url("../public/fonts/static/Inter-ExtraBold.ttf") format("truetype")
+}
+@font-face {
+  font-family: "inter-black";
+  src: url("../public/fonts/static/Inter-Black.ttf") format("truetype")
+} */
+
+@font-face {
+  font-family: "inter";
+  src: url("../public/fonts/Inter-VariableFont_slnt,wght.ttf");
+}
+
+html {
+  --normal-white: #fff;
+  --dark-white: #fafafa;
+  /*NOTE: probally --wtf-white was a design error and will not be used in the app*/
+  --wtf-white: #F6F6F6;
+  --background-gray: #efefef;
+  --light-gray: #c4c4c4;
+  --normal-gray: #808080;
+  --black: #000000;
+  --cta-cyan: #00fff0;
+}
