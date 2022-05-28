@@ -1,0 +1,44 @@
+.inputBox {
+  width: 100%;
+  height: fit-content;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  font-family: "inter-light";
+  font-size: var(--font-reg);
+  color: var(--gray);
+  line-height: 16px;
+
+  gap: 10px;
+
+  position: relative;
+
+  .formInput {
+    width: 100%;
+    height: 45px;
+    
+    background-color: var(--xx-light-gray);
+    
+    font-family: "inter-regular";
+    font-size: var(--font-lt);
+    color: var(--gray);
+  
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    padding: 0 0 0 10px;
+  }
+  .formInput::placeholder {
+    font-family: "inter-light";
+    color: var(--light-gray);
+  }
+
+  .imageWrapper {
+    position: absolute;
+    bottom: 5px;
+    right: 1px;
+  }
+
+}
