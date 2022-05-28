@@ -1,0 +1,59 @@
+.authBox {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: 150px 1fr 70px;
+
+  text-align: center;
+
+  .logoDiv {
+    width: 100%;
+    height: 100%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .formBox {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+  
+    justify-self: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    padding: 0 35px 50px;
+    
+    @media (max-width: 400px) {
+      padding: 0 15px 50px;
+    }
+
+    .authOption {
+      margin-top: 25px;
+
+      font-family: "inter-bold";
+      color: var(--gray);
+
+      span {
+        font-family: "inter-extra-bold";
+        color: var(--cta-cyan);
+        text-decoration: underline;
+      }
+    }
+  }
+  .footer {
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    color: var(--light-gray)
+  }
+}
