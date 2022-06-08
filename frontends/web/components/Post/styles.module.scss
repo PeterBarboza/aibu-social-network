@@ -1,0 +1,75 @@
+.post {
+  width: 100%;
+  height: fit-content;
+
+  background-color: var(--normal-white);
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+  padding: 10px 0 0 0;
+
+  .profileImage {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 0 0 0 10px;
+  }
+
+  .dataWrapper {
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 0 10px 0 15px;
+
+    > div { width: 100% }
+
+    .usernameBox {  
+      height: fit-content;
+
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      
+      font-family: "inter-bold";
+    }
+    .postContent {
+      height: fit-content;
+
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      font-family: "inter-medium";
+
+      padding: 10px 0 0 0;
+    }
+    .interactions {
+      height: fit-content;
+
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+
+      font-family: "inter-medium";
+
+      padding: 15px 0 15px 0;
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+}

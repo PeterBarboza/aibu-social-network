@@ -12,8 +12,6 @@ import styles from "../styles/auth.module.scss"
 const Auth: NextPage = () => {
   const [isNewAccount, setIsNewAccount] = useState(false)
 
-  useEffect(() => { }, [isNewAccount])
-
   return (
     <Layout>
       <Head>

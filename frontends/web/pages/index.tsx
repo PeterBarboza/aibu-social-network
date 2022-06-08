@@ -1,22 +1,23 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Router from "next/router"
 
-import { Layout } from "../components/Layout"
-import { Header } from '../components/Header'
-import { Logo } from '../components/Logo'
+import { useEffect } from "react"
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    Router.push("/feed")
+  }, [])
   return (
-    <Layout>
-      <Head>
-        <title>Aibu - Social network</title>
-        <meta name="description" content="Made with love by Pedro Barboza" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Header>
-        <Logo />
-      </Header>
-    </Layout>
+    <div style={{
+      width: "100vw",
+      height: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      <p style={{ fontSize: "30px", fontFamily: "inter-bold" }}>Loading ...</p>
+    </div>
   )
 }
 
