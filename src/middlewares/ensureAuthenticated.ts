@@ -27,6 +27,9 @@ export function ensureAuthenticated(req: Request, res: Response, next: NextFunct
     return res.status(401).json({ data: { message: "Invalid token" } })
   }
 
+
+  //TODO: Retirar a linha de código abaixo e manter o token inteiro
+  //dentro de req.headers.authorization
   req.headers._id = _id
 
   next()
