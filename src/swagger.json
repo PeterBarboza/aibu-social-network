@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AIBU - Social Network | API Documentation",
+    "description": "Essa API abrange todas as funcionalidades da aplicação.",
+    "termsOfService": "",
+    "contact": {
+      "email": "pedro.barboza.dev@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/v1",
+      "description": "API de test"
+    },
+    {
+      "url": "https://www.pedro.com",
+      "description": "API de produção"
+    }
+  ],
+  "paths": {
+    "/user/auth/register": {
+      "post": {
+        "summary": "Criação de um novo usuário",
+        "description": "Essa rota será responsável por cadastrar um novo usuário no banco de dados.",
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Pedro Barboza",
+                    "email": "pedro.barboza@examplemail.com",
+                    "password": "mysecretpass",
+                    "username": "pedro_007"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "user": {
+                    "name": "string",
+                    "email": "string",
+                    "password": null,
+                    "username": "string",
+                    "bio": "",
+                    "imgUrl": "",
+                    "createdAt": "1656407201656"
+                  },
+                  "token": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Generic error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
