@@ -1,5 +1,3 @@
-import { Request } from "express"
-
 import { s3, bucketName } from "../s3"
 
 import { IGetFromS3Params } from "../types/IS3"
