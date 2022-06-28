@@ -1,13 +1,11 @@
 import express from "express"
 import cors from "cors"
-import multer from "multer"
+import swaggerUI from "swagger-ui-express"
 import "dotenv/config"
 
-import { userRouter, authUserRouter } from "./router/userRoutes"
-import { postRouter } from "./router/postRoutes"
-import { likeRouter } from "./router/likeRouter"
-import { commentRouter } from "./router/commentRouter"
-import { ensureAuthenticated } from "./middlewares/ensureAuthenticated"
+import swaggerDocs from "./swagger.json"
+
+import { router } from "./router"
 
 const app = express()
 
@@ -27,11 +25,8 @@ app.use((req, res, next) => {
   next()
 })
 
-//TODO: Descomentar a linha abaixo
-app.use("/user/auth", authUserRouter)
-app.use("/user", /* ensureAuthenticated, */ userRouter)
-app.use("/post", ensureAuthenticated, postRouter)
-app.use("/like", ensureAuthenticated, likeRouter)
-app.use("/comment", ensureAuthenticated, commentRouter)
+app.use("/v1/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
+
+app.use("/v1", router)
 
 export { app, port }
